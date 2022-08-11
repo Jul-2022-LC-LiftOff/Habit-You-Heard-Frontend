@@ -5,7 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import AppBar from "@mui/material/AppBar";
 
-//TODO: Finish this code and the implement it into the Home.js
+//TODO: Finish this code and then implement it into the Home.js
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
     alignItems: "flex-start",
     paddingTop: theme.spacing(1),
@@ -34,4 +34,4 @@ function ProminentAppBar(props) {
   );
 }
 
-export default AppBar;
+export default ProminentAppBar;

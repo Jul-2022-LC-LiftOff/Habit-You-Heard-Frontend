@@ -7,10 +7,10 @@ import { styled } from "@mui/system";
 // import Favorite from "@mui/icons-material/Favorite";
 import { pink } from "@mui/material/colors";
 import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
 
 const StyledButton = styled(Button)({
   height: 100,
-  marginTop: 20,
 });
 
 function Habit(props) {
@@ -56,7 +56,7 @@ function Habit(props) {
           horizontal: "left",
         }}
       >
-        {props.description}
+        <Typography sx={{ p: 2 }}>{props.description}</Typography>
       </Popover>
     </ButtonGroup>
   );
