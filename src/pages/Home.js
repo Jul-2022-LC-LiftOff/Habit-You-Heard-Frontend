@@ -59,6 +59,7 @@ export default function ProminentAppBar() {
           </Box>
 
           <Stack direction="row" spacing={2}>
+            {/* TODO: Add Habits button to navigate to a habits page*/}
             <LinkButton to="calendar">Groups</LinkButton>
             <LinkButton to="yourprogress">Badges</LinkButton>
             <LinkButton to="signin">Logout</LinkButton>
@@ -81,31 +82,4 @@ export default function ProminentAppBar() {
       </Stack>
     </Box>
   );
-}
-
-{
-  /* <LinkButton
-to="yourprogress"
-variant="outlined"
-onClick={() => console.log("hello")}
-style={{ fontSize: "20px" }}
->
-Link Button
-</LinkButton> */
-}
-
-// {
-//   testHabits.habits.map((habit) => <Habit name={habit.name} />);
-// }
-
-{
-  /* <Box
-sx={{
-  width: 100,
-  height: 100,
-  borderRadius: 100,
-  alignItems: 'baseline',
-  backgroundColor: 'secondary.dark'
-}}
-/> */
 }
