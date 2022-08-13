@@ -104,7 +104,6 @@ export default function HabitsPage() {
       target: { value },
     } = event;
     setdaysOfTheWeek(
-      // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
   };
@@ -115,9 +114,9 @@ export default function HabitsPage() {
         sx={{
           backgroundColor: "primary.main",
           display: "flex",
-          width: 150,
-          height: 150,
-          borderEndEndRadius: 120,
+          width: 130,
+          height: 130,
+          borderEndEndRadius: 130,
           position: "fixed",
           justifyContent: "center",
           alignItems: "center",
@@ -128,8 +127,8 @@ export default function HabitsPage() {
             sx={{
               backgroundColor: "#fafafa",
               display: "flex",
-              width: 90,
-              height: 90,
+              width: 60,
+              height: 60,
               borderRadius: 100,
               justifyContent: "center",
               alignItems: "center"
