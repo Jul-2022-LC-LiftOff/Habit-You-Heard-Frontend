@@ -10,6 +10,8 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import YourProgress from "./pages/YourProgress";
 import CalendarView from "./pages/CalendarView";
+import HabitsPage from './pages/HabitsPage';
+import OpportunitiesPage from './pages/OpportunitiesPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,6 +23,8 @@ root.render(
         <Route path="createaccount" element={<SignUp />} />
         <Route path="yourprogress" element={<YourProgress />} />
         <Route path="calendar" element={<CalendarView />} />
+        <Route path="habitsPage" element={<HabitsPage />} />
+        <Route path="OpportunitiesPage" element={<OpportunitiesPage />} />
       </Route>
     </Routes>
   </BrowserRouter>
