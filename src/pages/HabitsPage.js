@@ -120,7 +120,7 @@ export default function HabitsPage() {
           alignItems: "center",
         }}
       >
-        <Link to="/">
+        <Link to="/" sx={{ textDecoration: "none" }}>
           <Box
             sx={{
               backgroundColor: "#fafafa",
