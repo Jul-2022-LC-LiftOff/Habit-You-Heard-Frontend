@@ -3,8 +3,6 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/system";
-// import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-// import Favorite from "@mui/icons-material/Favorite";
 import { pink } from "@mui/material/colors";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
@@ -33,8 +31,6 @@ function Habit(props) {
         <Checkbox
           {...props}
           size="large"
-          //   icon={<FavoriteBorder />}
-          //   checkedIcon={<Favorite />}
           sx={{
             color: pink[800],
             "&.Mui-checked": {
