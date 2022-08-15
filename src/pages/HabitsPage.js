@@ -103,9 +103,7 @@ export default function HabitsPage() {
     const {
       target: { value },
     } = event;
-    setdaysOfTheWeek(
-      typeof value === "string" ? value.split(",") : value
-    );
+    setdaysOfTheWeek(typeof value === "string" ? value.split(",") : value);
   };
 
   return (
@@ -117,7 +115,7 @@ export default function HabitsPage() {
           width: 130,
           height: 130,
           borderEndEndRadius: 130,
-          position: "fixed",
+          position: "relative",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -131,7 +129,7 @@ export default function HabitsPage() {
               height: 60,
               borderRadius: 100,
               justifyContent: "center",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <ArrowBack />
@@ -147,7 +145,6 @@ export default function HabitsPage() {
               width: 400,
               height: 100,
               borderRadius: 5,
-              marginTop: "25px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
