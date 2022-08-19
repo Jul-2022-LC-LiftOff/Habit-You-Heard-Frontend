@@ -91,13 +91,17 @@ const SignUp = () => {
     setUsernameHelperText(getUsernameValidationMessage());
     setFormSubmitted(true);
     if (formSubmitted) {
-      const updatedValue = { password: bcrypt.hashSync(user.password, salt) };
+      const hashedPassword = bcrypt.hashSync(user.password, salt);
+      const updatedValue = { password: hashedPassword };
+      console.log(user.password);
       setUser((user) => ({
         ...user,
         ...updatedValue,
       }));
+      console.log(user.password);
+
       console.log(hasErrors);
-      if (!hasErrors) {
+      if (!hasErrors && user.password === hashedPassword) {
         fetch("http://localhost:8080/add", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -121,7 +125,7 @@ const SignUp = () => {
       title="Create Account"
       buttonHandler={handleSignUp}
       linkPath="/auth/signin"
-      linkTitle="Sign In"
+      linkTitle="Already have an account? Sign In"
     >
       <Stack spacing={4} maxWidth={800}>
         <TextField

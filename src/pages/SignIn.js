@@ -5,8 +5,13 @@ import { useNavigate } from "react-router";
 import AuthLayout from "../components/layouts/AuthLayout";
 
 export default function SignInSide() {
-  const [response, setResponse] = useState("");
   const navigate = useNavigate();
+  const [token, setToken] = useState("");
+  const [loginClicked, setLoginClicked] = useState(false);
+
+  const [usernameNotFound, setUsernameNotFound] = useState(false);
+  const [passwordHelperText, setPasswordHelperText] = useState("");
+  const [usernameHelperText, setUsernameHelperText] = useState("");
 
   const [user, setUser] = useState({
     email: "",
@@ -14,13 +19,45 @@ export default function SignInSide() {
     password: "",
   });
 
-  const handleLogin = () => {};
+  function fetchToken() {
+    fetch("http://localhost:8080/api/auth/assign/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.text())
+      .then((data) => setToken(data));
+  }
+
+  console.log(token);
+  const handleLogin = () => {
+    setLoginClicked(true);
+  };
+
   useEffect(() => {
-    //needs response from Auth controller (not yet built)
-    if (response !== "" && response === "Verified") {
-      navigate("/");
+    if (token === "Invalid Password") {
+      setPasswordHelperText("Invalid Password!");
     }
-  });
+    if (token === "User Not Found") {
+      setUsernameHelperText("User Not Found");
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (loginClicked) {
+      fetchToken();
+      //needs response from Auth controller (not yet built)
+      if (
+        token !== "" &&
+        token !== "Invalid Password" &&
+        token !== "User Not Found"
+      ) {
+        navigate("/");
+      } else {
+        setLoginClicked(false);
+      }
+    }
+  }, [loginClicked]);
   return (
     <AuthLayout
       title="Welcome Back!"
@@ -40,6 +77,8 @@ export default function SignInSide() {
               ...updatedValue,
             }));
           }}
+          error={token === "User Not Found"}
+          helperText={usernameHelperText}
         />
         <TextField
           label="Password"
@@ -53,6 +92,8 @@ export default function SignInSide() {
               ...updatedValue,
             }));
           }}
+          error={token === "Invalid Password"}
+          helperText={passwordHelperText}
         />
       </Stack>
     </AuthLayout>
