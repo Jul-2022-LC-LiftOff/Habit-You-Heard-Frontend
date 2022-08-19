@@ -1,6 +1,6 @@
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import AuthLayout from "../components/layouts/AuthLayout";
 
@@ -19,45 +19,39 @@ export default function SignInSide() {
     password: "",
   });
 
-  function fetchToken() {
-    fetch("http://localhost:8080/api/auth/assign/token", {
+  async function fetchToken() {
+    return await fetch("http://localhost:8080/api/auth/assign/token", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
-    })
-      .then((res) => res.text())
-      .then((data) => setToken(data));
+    }).then((res) => res.json());
   }
 
   console.log(token);
+
   const handleLogin = () => {
-    setLoginClicked(true);
+    fetchToken().then((response) => {
+      if (response.token) {
+        console.log(response.token);
+        setPasswordHelperText("");
+        setUsernameHelperText("");
+        navigate("/");
+      } else if (response.errorMessage) {
+        if (response.errorMessage === "Invalid Password") {
+          setPasswordHelperText("Invalid Password!");
+        } else {
+          setPasswordHelperText("");
+        }
+        if (response.errorMessage === "User Not Found") {
+          setUsernameHelperText("User Not Found");
+        } else {
+          setUsernameHelperText("");
+        }
+      }
+    });
+    // console.log(token1);
   };
 
-  useEffect(() => {
-    if (token === "Invalid Password") {
-      setPasswordHelperText("Invalid Password!");
-    }
-    if (token === "User Not Found") {
-      setUsernameHelperText("User Not Found");
-    }
-  }, [token]);
-
-  useEffect(() => {
-    if (loginClicked) {
-      fetchToken();
-      //needs response from Auth controller (not yet built)
-      if (
-        token !== "" &&
-        token !== "Invalid Password" &&
-        token !== "User Not Found"
-      ) {
-        navigate("/");
-      } else {
-        setLoginClicked(false);
-      }
-    }
-  }, [loginClicked]);
   return (
     <AuthLayout
       title="Welcome Back!"
@@ -77,7 +71,7 @@ export default function SignInSide() {
               ...updatedValue,
             }));
           }}
-          error={token === "User Not Found"}
+          error={usernameHelperText === "User Not Found"}
           helperText={usernameHelperText}
         />
         <TextField
@@ -92,7 +86,7 @@ export default function SignInSide() {
               ...updatedValue,
             }));
           }}
-          error={token === "Invalid Password"}
+          error={passwordHelperText === "Invalid Password"}
           helperText={passwordHelperText}
         />
       </Stack>
