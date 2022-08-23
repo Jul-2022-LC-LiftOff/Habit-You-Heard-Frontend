@@ -1,0 +1,17 @@
+{"users":
+    [{
+        "email" : "rydela0106@gmail.com",
+        "name" : "Rydela",
+        "points" : 499
+    },
+    {
+        "email" : "brandangler@gmail.com",
+        "name" : "That Guy",
+        "points" : 10
+    },
+    {
+        "email" : "otherguy@place.here",
+        "name" : "Other Person",
+        "points" : 230
+    }]
+}

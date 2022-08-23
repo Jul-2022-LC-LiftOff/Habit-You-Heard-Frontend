@@ -1,0 +1,16 @@
+{
+    "badges": [
+        {"id"         : "0",
+         "name"       : "On a streak!",
+         "description": "Good work, you've been on a streak for 3 days!",
+         "imgurl"     : "./badgeicons/badge.png"},
+        {"id"         : "1",
+         "name"       : "Did a thing!",
+         "description": "Wow, you did a thing? Sick.",
+         "imgurl"     : "./badgeicons/badge.png"},
+        {"id"         : "2",
+         "name"       : "Pro Fortnite Gamer",
+         "description": "You got the chicken dinner? Crazy!",
+         "imgurl"     : "./badgeicons/streak.png"}
+    ]
+}
