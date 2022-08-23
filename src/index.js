@@ -12,7 +12,8 @@ import YourProgress from "./pages/YourProgress";
 import CalendarView from "./pages/CalendarView";
 import HabitsPage from './pages/HabitsPage';
 import OpportunitiesPage from './pages/OpportunitiesPage';
-
+import { StrictMode } from "react";
+import CalendarComponent from "./pages/CalendarView.js";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
