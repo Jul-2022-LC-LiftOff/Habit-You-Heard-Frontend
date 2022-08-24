@@ -24,7 +24,6 @@ const StyledDiv = styled("div")({
 });
 
 function AuthLayout(props) {
-  console.log(props);
   return (
     <StyledDiv>
       <Paper elevation={3} sx={{ padding: 8 }}>
