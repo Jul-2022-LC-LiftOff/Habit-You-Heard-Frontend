@@ -49,7 +49,6 @@ export default function SignInSide() {
         }
       }
     });
-    // console.log(token1);
   };
 
   return (
@@ -86,7 +85,7 @@ export default function SignInSide() {
               ...updatedValue,
             }));
           }}
-          error={passwordHelperText === "Invalid Password"}
+          error={passwordHelperText === "Invalid Password!"}
           helperText={passwordHelperText}
         />
       </Stack>
