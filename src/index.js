@@ -5,11 +5,12 @@ import AuthBackground from "./components/layouts/AuthBackground";
 import "./index.css";
 import SignUp from "./pages//signup/SignUp";
 import CalendarView from "./pages/CalendarView";
+import HabitsPage from "./pages/HabitsPage";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
+import OpportunitiesPage from "./pages/OpportunitiesPage";
 import SignIn from "./pages/SignIn";
 import YourProgress from "./pages/YourProgress";
-// import App from './App';
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -21,6 +22,8 @@ root.render(
 
         <Route path="yourprogress" element={<YourProgress />} />
         <Route path="calendar" element={<CalendarView />} />
+        <Route path="habitsPage" element={<HabitsPage />} />
+        <Route path="OpportunitiesPage" element={<OpportunitiesPage />} />
       </Route>
       <Route path="/auth" element={<AuthBackground />}>
         <Route path="signin" element={<SignIn />} />
