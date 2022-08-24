@@ -10,13 +10,15 @@ import testHabits from "../testData/testHabits.json";
 import Habit from "../components/Habit";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Link } from "react-router-dom";
+import ThemeToggle from "../components/ThemeToggle";
+
 
 const StyledDiv = styled("div")(() => ({
   display: "flex",
   justifyContent: "center",
 }));
 
-export default function Home() {
+export default function Home(props) {
   
   const current = new Date();
   const date = `${current.getMonth() +
@@ -36,8 +38,9 @@ export default function Home() {
           </Typography>
 
           <Stack direction="row" spacing={2}>
+            <ThemeToggle onToggleTheme={props.onToggleTheme} />
             <LinkButton to="yourprogress">Badges</LinkButton>
-            <LinkButton to="signin">Logout</LinkButton>
+            <LinkButton to="/auth/signin">Logout</LinkButton>
           </Stack>
         </Stack>
 
