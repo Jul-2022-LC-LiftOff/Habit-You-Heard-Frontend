@@ -1,30 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-// import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./pages/Layout";
-import Home from "./pages/Home";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
-import YourProgress from "./pages/YourProgress";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AuthBackground from "./components/layouts/AuthBackground";
+import "./index.css";
+import SignUp from "./pages//signup/SignUp";
 import CalendarView from "./pages/CalendarView";
-import HabitsPage from './pages/HabitsPage';
-import OpportunitiesPage from './pages/OpportunitiesPage';
+import HabitsPage from "./pages/HabitsPage";
+import Home from "./pages/Home";
+import Layout from "./pages/Layout";
+import OpportunitiesPage from "./pages/OpportunitiesPage";
+import SignIn from "./pages/SignIn";
+import YourProgress from "./pages/YourProgress";
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="signin" element={<SignIn />} />
-        <Route path="createaccount" element={<SignUp />} />
+
         <Route path="yourprogress" element={<YourProgress />} />
         <Route path="calendar" element={<CalendarView />} />
         <Route path="habitsPage" element={<HabitsPage />} />
         <Route path="OpportunitiesPage" element={<OpportunitiesPage />} />
+      </Route>
+      <Route path="/auth" element={<AuthBackground />}>
+        <Route path="signin" element={<SignIn />} />
+        <Route path="signup" title={SignUp.title} element={<SignUp />} />
       </Route>
     </Routes>
   </BrowserRouter>
