@@ -9,9 +9,8 @@ const salt = bcrypt.genSaltSync(10);
 
 const SignUp = () => {
   const [response, setResponse] = useState("");
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  let formSubmitted = false;
   // const [hasErrors, setHasErrors] = useState(false);
-  let hasError = false;
   const [emailHelperText, setEmailHelperText] = useState("");
   const [emailHasError, setEmailHasError] = useState(false);
   const navigate = useNavigate();
@@ -38,94 +37,76 @@ const SignUp = () => {
   // }
 
   function getUsernameValidationMessage() {
-    if (user.username === "") {
-      hasError = true;
+    if (formSubmitted) {
+      if (user.username === "") {
+        setUsernameHasError(true);
 
-      return "Username is blank!";
-    } else if (user.username.length > 30) {
-      hasError = true;
+        return "Username is blank!";
+      } else if (user.username.length > 30) {
+        setUsernameHasError(true);
 
-      return "Username must be less than 30 characters!";
-    } else {
-      hasError = false;
-      return "";
+        return "Username must be less than 30 characters!";
+      } else {
+        setUsernameHasError(false);
+
+        return "";
+      }
     }
   }
 
   function getPasswordValidationMessage() {
-    console.log(user.password);
-    console.log(hasError);
     if (user.password === "") {
-      hasError = true;
+      setPasswordHasError(true);
       return "Password is blank!";
     } else if (user.password.length > 128) {
-      hasError = true;
+      setPasswordHasError(true);
 
       return "Password must be less than 128 characters!";
     } else if (user.password !== user.password2) {
-      hasError = true;
+      setPasswordHasError(true);
 
       return "Passwords are not the same";
     } else {
-      hasError = false;
+      setPasswordHasError(false);
+
       return "";
     }
-    console.log(user.password);
-    console.log(hasError);
   }
 
   function getEmailValidationMessage() {
     if (user.email === "") {
-      hasError = true;
+      setEmailHasError(true);
+
       return "Email is blank!";
     } else if (!isValidEmail(user.email)) {
-      hasError = true;
+      setEmailHasError(true);
+
       return "Invalid email!";
     }
     //   else if(isUniqueEmail(email)){
     //      setHasErrors(true);
     // }
     else {
-      hasError = false;
+      setEmailHasError(false);
 
       return "";
     }
   }
-  // useEffect(() => {
-  //   console.log(hasErrors);
-  //   // if (usernameHasError || passwordHasError || emailHasError) {
-  //   //   setHasErrors(true);
-  //   // }
-  //   console.log(hasErrors);
-  //   console.log(formSubmitted);
-  // }, [usernameHasError, passwordHasError, emailHasError, formSubmitted]);
+
   const handleSignUp = () => {
+    formSubmitted = true;
     setEmailHelperText(getEmailValidationMessage());
     setPasswordHelperText(getPasswordValidationMessage());
     setUsernameHelperText(getUsernameValidationMessage());
-    console.log(hasError);
-    // console.log()
-    console.log(getEmailValidationMessage());
-    console.log(getPasswordValidationMessage());
-    console.log(getUsernameValidationMessage());
 
     if (
       getEmailValidationMessage() === "" &&
       getPasswordValidationMessage() === "" &&
       getUsernameValidationMessage() === ""
     ) {
-      console.log("executing");
       handleFetch();
     }
   };
-
-  // useEffect(() => {
-  //   if (formSubmitted && !hasErrors) {
-  //     handleFetch();
-  //   } else {
-  //     setFormSubmitted(false);
-  //   }
-  // }, [formSubmitted]);
 
   const handleFetch = () => {
     const hashedPassword = bcrypt.hashSync(user.password, salt);
@@ -137,26 +118,19 @@ const SignUp = () => {
     };
 
     if (newUser.password === hashedPassword) {
-      fetch("http://localhost:8080/add", {
+      fetch("http://localhost:8080/api/user/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),
       })
         .then((res) => res.text())
         .then((data) => {
-          console.log(data);
           setResponse(data);
         });
     }
-
-    console.log(user.password);
-
-    console.log(hasError);
   };
   useEffect(() => {
-    //temporary: (only works for Micah's test controller)
-
-    if (response !== "" && response === "Hi") {
+    if (response !== "" && response === "Created") {
       navigate("/auth/signin");
     }
   });
