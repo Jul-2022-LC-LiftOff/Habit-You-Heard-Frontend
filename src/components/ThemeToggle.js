@@ -7,6 +7,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 
 const ThemeToggle = (props) => {
+    console.log(props)
     return (
         <IconButton id='dark-mode' onClick={() => props.onToggleTheme()}>
             {props.darkMode ? "Dark Mode" :  "Light Mode"}

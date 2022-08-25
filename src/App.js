@@ -29,7 +29,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home onToggleTheme={handleToggleTheme} />} />
+            <Route index element={<Home darkMode={darkMode} onToggleTheme={handleToggleTheme} />} />
 
             <Route path="yourprogress" element={<YourProgress />} />
             <Route path="calendar" element={<CalendarView />} />
