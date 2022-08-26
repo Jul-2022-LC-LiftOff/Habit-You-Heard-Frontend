@@ -8,7 +8,11 @@ export default class FullCalendarApp extends React.Component {
       <FullCalendar
         plugins={[ dayGridPlugin ]}
         eventContent={renderEventContent}
-      />
+        events={[
+                        { title: 'Reading book', allDay: true, start: '2022-08-29', end: '2022-08-30', daysOfWeek:[0,1,2,4,6] },
+                        { title: 'Jogging', allDay: true, start: '2022-08-20', daysOfWeek: [1,2,3,4], color: 'red' },
+                        {title: 'playing Stardew Valley', allDay: true, start: '2022-08-29', daysOfWeek:[0,6]}
+      ]}/>
     )
   }
 }
