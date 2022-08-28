@@ -54,7 +54,7 @@ export default function Taskbar(props){
                 justifyContent: "center",
                 alignItems: "center",
                 position: "absolute",
-                top: 0,
+                top: 0
               }}
             >
               <Typography
