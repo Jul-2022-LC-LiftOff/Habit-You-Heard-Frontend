@@ -11,11 +11,16 @@ import Layout from "./pages/Layout";
 import OpportunitiesPage from "./pages/OpportunitiesPage";
 import SignIn from "./pages/SignIn";
 import YourProgress from "./pages/YourProgress";
+import testUser from "./testData/testUser.json";
+import testHabits from "./testData/testHabits.json";
 
 
 
 function App() {
-  
+
+  const [user, setUser] = useState(testUser);
+  // console.log("This is the tested user: ", testUser);
+
   const [darkMode, setDarkMode] = useState(false)
   const handleToggleTheme = () => {setDarkMode(!darkMode)}
   const theme = createTheme({
@@ -29,11 +34,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home onToggleTheme={handleToggleTheme} />} />
+            <Route index element={<Home onToggleTheme={handleToggleTheme}/>} />
 
             <Route path="yourprogress" element={<YourProgress />} />
             <Route path="calendar" element={<CalendarView />} />
-            <Route path="habitsPage" element={<HabitsPage />} />
+            <Route path="habitsPage" element={<HabitsPage user={testUser} />} />
             <Route path="OpportunitiesPage" element={<OpportunitiesPage />} />
           </Route>
           <Route path="/auth" element={<AuthBackground />}>

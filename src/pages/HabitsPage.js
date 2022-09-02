@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Typography } from "@mui/material";
@@ -7,7 +7,6 @@ import InputUnstyled from "@mui/base/InputUnstyled";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import AddHabit from "../components/AddHabit";
-import testHabits from "../testData/testHabits.json";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -18,6 +17,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Stack from "@mui/material/Stack";
 import { ArrowBack } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+// import { userForm } from "react-hook-form";
 
 const blue = {
   100: "#DAECFF",
@@ -86,7 +86,27 @@ const MenuProps = {
   },
 };
 
-export default function HabitsPage() {
+// type formValues = {
+//   name: string;
+//   description: string;
+// };
+
+export default function HabitsPage(props) {
+  // Remove the fetch request, use the test habits and try to fix the form.
+  const [habits, setHabits] = useState([]);
+  useEffect(() => {
+    const userHabits = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      // body: JSON.stringify(getHabits),
+    };
+    fetch(
+      `http://localhost:8080/api/habits/1`,
+      userHabits
+    ).then((response) => response.json());
+    // .then(data => setHabits(data.id));
+  });
+
   const CustomInput = React.forwardRef(function CustomInput(props, ref) {
     return (
       <InputUnstyled
@@ -105,6 +125,17 @@ export default function HabitsPage() {
     } = event;
     setdaysOfTheWeek(typeof value === "string" ? value.split(",") : value);
   };
+
+  // const { register, handleSubmit } = useForm<FormValues>({
+  //   defaultValues: {
+  //     name: '',
+  //     description: ''
+  //   }
+  // });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+  }
 
   return (
     <>
@@ -163,7 +194,7 @@ export default function HabitsPage() {
       </Grid>
 
       <Grid container spacing={2} marginTop="20px">
-        {testHabits.habits.map((habit) => (
+        {habits.map((habit) => (
           <Grid xs={6} display="flex" justifyContent="center">
             <AddHabit
               name={habit.name}
@@ -173,6 +204,7 @@ export default function HabitsPage() {
         ))}
       </Grid>
 
+      {/* <form onSubmit={handleSubmit(onSubmit)}> */}
       <Stack
         sx={{
           display: "flex",
@@ -182,7 +214,8 @@ export default function HabitsPage() {
         }}
         direction="row"
       >
-        <CustomInput placeholder="Enter new habit here..." />
+        <CustomInput placeholder="Enter new habit here..."/>
+        {/* {...register("name")} */}
 
         <div>
           <FormControl sx={{ m: 1, width: 150, marginBottom: "25px" }}>
@@ -207,10 +240,14 @@ export default function HabitsPage() {
           </FormControl>
         </div>
 
+        <input type="submit">
         <Fab color="primary">
           <AddIcon />
         </Fab>
+        </input>
+
       </Stack>
+      {/* </form> */}
     </>
   );
 }

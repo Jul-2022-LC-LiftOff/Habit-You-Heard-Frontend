@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Checkbox from "@mui/material/Checkbox";
@@ -12,8 +12,31 @@ const StyledButton = styled(Button)({
 });
 
 function Habit(props) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [affirmHabit, setAffirmHabit] = useState(null);
+  // useEffect(() => {
+  //   const affirmUserHabit = {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //   };
+  //   fetch(
+  //     `http://localhost:8080/api/habit/1/affirm`,
+  //     affirmUserHabit
+  //   ).then((response) => response.json());
+  // });
 
+  const [disaffirmHabit, setDisaffirmHabit] = useState(null);
+  // useEffect(() => {
+  //   const disaffirmUserHabit = {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //   };
+  //   fetch(
+  //     `http://localhost:8080/api/habit/1/defirm`,
+  //     disaffirmUserHabit
+  //   ).then((response) => response.json());
+  // });
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -27,17 +50,17 @@ function Habit(props) {
 
   return (
     <ButtonGroup variant="contained">
-      <StyledButton size="small">
+      <StyledButton size="small" onClick={affirmHabit} checked={disaffirmHabit}>
         <Checkbox
           {...props}
-          size="large"
-          sx={{
+          size="large" sx=
+          {{
             color: pink[800],
             "&.Mui-checked": {
               color: pink[600],
             },
           }}
-        />
+          />
       </StyledButton>
       <StyledButton sx={{ width: 250 }} onClick={handleClick}>
         {props.name}

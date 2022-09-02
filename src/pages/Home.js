@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import LinkButton from "../components/LinkButton";
-import testUser from "../testData/testUser.json";
 import Stack from "@mui/material/Stack";
-import testHabits from "../testData/testHabits.json";
 import Habit from "../components/Habit";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Link } from "react-router-dom";
@@ -18,8 +16,32 @@ const StyledDiv = styled("div")(() => ({
   justifyContent: "center",
 }));
 
+
 export default function Home(props) {
   
+  const [habits, setHabits] = useState([]);
+    // const userHabits = {
+    //   method: "GET",
+    //   headers: { "Content-Type": "application/json" }
+    //   // body: JSON.stringify(getHabits),
+    // };
+    // fetch(`http://localhost:8080/api/habits/1`, userHabits)
+    //   .then(response => response.json())
+    //   .then(data => {setHabits(data)});
+
+    useEffect(() => {
+      fetch('http://localhost:8080/api/habits/1')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setHabits(data);
+      })
+    }, [props]);
+    
+  console.log(habits);
+
   const current = new Date();
   const date = `${current.getMonth() +
     1}/${current.getDate()}/${current.getFullYear()}`;
@@ -34,7 +56,7 @@ export default function Home(props) {
             component="div"
             sx={{ flexGrow: 1, alignSelf: "flex-start" }}
           >
-            Hello, {testUser.username}
+            Hello,
           </Typography>
 
           <Stack direction="row" spacing={2}>
@@ -86,11 +108,11 @@ export default function Home(props) {
       </Grid>
 
       <Grid container spacing={2}>
-        {testHabits.habits.map((habit) => (
+        {habits.map((habit) => (
           <Grid xs={6} display="flex" justifyContent="center">
             <Habit name={habit.name} description={habit.description}></Habit>
           </Grid>
-        ))}
+       ))} 
       </Grid>
     </>
   );
