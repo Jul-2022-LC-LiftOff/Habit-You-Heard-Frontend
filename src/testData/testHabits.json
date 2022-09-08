@@ -5,7 +5,7 @@
             "name" : "Read a book every day.",
             "description" : "I can read 20 pages in a book every day.",
             "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-            "pointValue" : 479,
+            "pointValue" : 1000,
             "streak" : 42
         },
         
@@ -14,7 +14,7 @@
             "name" : "Water the garden.",
             "description" : "Make sure the plants aren't thirsty.",
             "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-            "pointValue" : 300,
+            "pointValue" : 500,
             "streak" : 42
         },
 
@@ -23,7 +23,7 @@
             "name" : "Cardio workout.",
             "description" : "Jog a mile under 10 minutes.",
             "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-            "pointValue" : 100,
+            "pointValue" : 0,
             "streak" : 42
         },
 
@@ -32,7 +32,7 @@
             "name" : "Learn how to cook something new.",
             "description" : "Eating toast and eggs every day is pretty boring.",
             "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-            "pointValue" : 1,
+            "pointValue" : 1500,
             "streak" : 42
         },
 
@@ -41,7 +41,7 @@
             "name" : "h.",
             "description" : "some example description.",
             "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-            "pointValue" : 0,
+            "pointValue" : 2000,
             "streak" : 42
         },
 
@@ -50,7 +50,7 @@
             "name" : "Some example habit that is very long just to test how many words I can fit in a habit name before it looks really weird.",
             "description" : "some example description.",
             "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-            "pointValue" : 420
+            "pointValue" : 2500
         },
 
         {
@@ -58,7 +58,7 @@
             "name" : "Feed the cat.",
             "description" : "You should also probably feed the cat.",
             "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-            "pointValue" : 139,
+            "pointValue" : 3000,
             "streak" : 42
         },
 
@@ -67,6 +67,7 @@
             "name" : "Feed the dog.",
             "description" : "Make sure the dog isn't hungry.",
             "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "pointValue" : 3500,
             "streak" : 42
         }, 
         {
@@ -74,6 +75,7 @@
             "name" : "Stop smoking.",
             "description" : "Don't inhale.",
             "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "pointValue" : 4000,
             "streak" : 42
         },
         {

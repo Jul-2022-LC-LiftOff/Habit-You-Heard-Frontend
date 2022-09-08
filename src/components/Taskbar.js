@@ -13,17 +13,18 @@ const StyledDiv = styled("div")(() => ({
     justifyContent: "center",
   }));
 
-export default function Taskbar(props){
-    const current = new Date();
-    const date = `${current.getMonth() +
-        1}/${current.getDate()}/${current.getFullYear()}`;
-
+export default function Taskbar({points, contentType}){
     let bubbleContent;
-    if(props.contentType === "date"){
-        bubbleContent = date;
-    } else if (props.contentType === "points"){
-        bubbleContent = `${props.points} Points`;
+    let bubbleLink;
+    if(contentType === "date"){
+        const current = new Date();
+        bubbleContent = `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`;
+        bubbleLink = "calendar";
+    } else if (contentType === "points"){
+        bubbleContent = () => {return (<><u>Points</u><br/>{points}</>);}
+        bubbleLink = "habitsPage";
     }
+
     return (
         <AppBar sx={{ marginBottom: "15px" }} position="static">
         <Stack direction="row" paddingBottom={4} minHeight="43px">
@@ -35,14 +36,14 @@ export default function Taskbar(props){
           >
             Hello, {testUser.username}
           </Typography>
-
           <Stack direction="row" spacing={2}>
+            <LinkButton to="..">Home</LinkButton>
             <LinkButton to="yourprogress">Badges</LinkButton>
             <LinkButton to="signin">Logout</LinkButton>
           </Stack>
         </Stack>
 
-        <Link to="calendar" textDecoration="none">
+        <a href={bubbleLink} textDecoration="none">
           <StyledDiv>
             <Box
               sx={{
@@ -60,14 +61,15 @@ export default function Taskbar(props){
               <Typography
                 sx={{
                   color: "#fafafa",
-                  fontSize: 25,
+                  fontSize: 28,
+                  textAlign:"center"
                 }}
               >
-                {bubbleContent}
+                {bubbleContent()}
               </Typography>
             </Box>
           </StyledDiv>
-        </Link>
+        </a>
       </AppBar>
     );
 }
