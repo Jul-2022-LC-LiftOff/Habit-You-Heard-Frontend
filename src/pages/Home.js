@@ -38,7 +38,7 @@ export default function Home(props) {
           </Typography>
 
           <Stack direction="row" spacing={2}>
-            <ThemeToggle onToggleTheme={props.onToggleTheme} />
+          <ThemeToggle darkMode={props.darkMode} onToggleTheme={props.onToggleTheme} />
             <LinkButton to="yourprogress">Badges</LinkButton>
             <LinkButton to="/auth/signin">Logout</LinkButton>
           </Stack>
