@@ -1,17 +1,16 @@
-import React from "react";
-import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import LinkButton from "../components/LinkButton";
-import testUser from "../testData/testUser.json";
 import Stack from "@mui/material/Stack";
-import testHabits from "../testData/testHabits.json";
-import Habit from "../components/Habit";
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
+import React from "react";
 import { Link } from "react-router-dom";
+import Habit from "../components/Habit";
+import LinkButton from "../components/LinkButton";
 import ThemeToggle from "../components/ThemeToggle";
-
+import testHabits from "../testData/testHabits.json";
+import testUser from "../testData/testUser.json";
 
 const StyledDiv = styled("div")(() => ({
   display: "flex",
@@ -19,7 +18,6 @@ const StyledDiv = styled("div")(() => ({
 }));
 
 export default function Home(props) {
-  
   const current = new Date();
   const date = `${current.getMonth() +
     1}/${current.getDate()}/${current.getFullYear()}`;
