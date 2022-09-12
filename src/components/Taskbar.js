@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import LinkButton from "./LinkButton";
 import testUser from "../testData/testUser.json";
 import Stack from "@mui/material/Stack";
-import { Link } from "react-router-dom";
 
 const StyledDiv = styled("div")(() => ({
     display: "flex",

@@ -57,21 +57,24 @@ const YourProgress = () => {
     let listUsers = Users.users;
     let listHabits = Habits.habits;
       return (
-      <Paper sx={{backgroundImage: `url(background2.png)`}}>
-      <Taskbar contentType="points" points={listUsers[0].points}></Taskbar>
-      <Grid container spacing={10} marginTop="70px" justifyContent="center">
-          {listHabits.map((habit) => (
-            <Grid xs={10} md={3.5}>
-              <HabitBadgeProgress 
-                title={habit.name}
-                description={habit.description}
-                badgeMeta={getBadgeNameAndURL(habit.pointValue)}
-                streakLength={getStreakMessage(habit.streak)}
-                score={habit.pointvalue}
-              />
-            </Grid>
-          ))}
-      </Grid>
+      <Paper sx={{backgroundImage: `url(background3.png)`,
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  minxWidth: "1",
+                  minHeight: "1"}}>
+        <Taskbar contentType="points" points={listUsers[0].points}></Taskbar>
+        <Grid container spacing={10} marginTop="70px" justifyContent="center">
+            {listHabits.map((habit) => (
+                <HabitBadgeProgress 
+                  title={habit.name}
+                  description={habit.description}
+                  badgeMeta={getBadgeNameAndURL(habit.pointValue)}
+                  streakLength={getStreakMessage(habit.streak)}
+                  score={habit.pointvalue}
+                />
+            ))}
+        </Grid>
       </Paper>)};
   
   export default YourProgress;

@@ -5,19 +5,17 @@ import { borders, Box, sizing } from "@mui/system";
 
 const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
-
+    
     const handlePopoverOpen = (event) => {
       setAnchorEl(event.currentTarget);
     };
-  
     const handlePopoverClose = () => {
       setAnchorEl(null);
     };
-  
     const open = Boolean(anchorEl);
 
     return (
-    <>
+    <Grid xs={10} md={3.5}>
         <Paper 
             elevation={7} 
             sx={{
@@ -55,36 +53,6 @@ const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, }) => 
                         }    
                     }}/>
             </Grid>
-                    {/*TYPOGRAPHY FOR RANK BELOW IMAGE
-                    <Typography sx={{
-                        fontSize: '.8rem',
-                        color: "#fafafa",
-                        textAlign: "center",
-                        justify: "end"
-                    }}>{badgeMeta.rank}</Typography>
-                    */}
-                {/*GRID FOR DESCRIPTION
-                <Grid xs={12} md={4}>
-                    <Typography sx={{
-                        fontSize: '1rem',
-                        color: "#fafafa",
-                        textAlign: "center",
-                        alignItems: "center",
-                    }}>
-                            {description}
-                    </Typography>
-                </Grid>*/}
-                {/* GRID FOR STREAK
-                <Grid xs={12} md={4}>
-                    <Typography sx={{
-                        fontSize: '1rem',
-                        color: "#fafafa",
-                        textAlign: "center",
-                        alignItems: "center",
-                    }}>
-                        {streakLength}
-                    </Typography>
-                </Grid>*/}
         </Paper>
         <Popover
             id="mouse-over-popover"
@@ -126,9 +94,8 @@ const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, }) => 
                         <Box borderBottom="1px solid white" padding="10px" >{description}</Box>
                         <Box                                padding="10px">{streakLength}</Box>
                 </Typography>
-
         </Popover>
-    </>
+    </Grid>
     );
 };
 
