@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import IconButton from "@mui/material/IconButton";
@@ -14,7 +14,7 @@ const StyledButton = styled(Button)({
 });
 
 export default function AddHabit(props) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -46,8 +46,12 @@ export default function AddHabit(props) {
           <Alert
             severity="warning"
             action={
-              <Button color="inherit" size="small">
-                Delete
+              <Button
+                color="inherit"
+                size="small"
+                onClick={props.buttonHandler}
+              >
+                Stop
               </Button>
             }
           >
@@ -56,6 +60,7 @@ export default function AddHabit(props) {
           </Alert>
         </Popover>
       </StyledButton>
+
       <StyledButton sx={{ width: 250 }}>{props.name}</StyledButton>
     </ButtonGroup>
   );
