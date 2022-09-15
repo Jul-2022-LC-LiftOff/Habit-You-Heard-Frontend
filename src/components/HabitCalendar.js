@@ -1,7 +1,9 @@
 import React from 'react'
 import FullCalendar from '@fullcalendar/react'; 
 import dayGridPlugin from '@fullcalendar/daygrid'; 
-import {habits} from "../testData/testHabits.json";
+import testHabits from "../testData/testHabits.json";
+
+const {habits} = testHabits;
 
 let daysCheckArray = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
