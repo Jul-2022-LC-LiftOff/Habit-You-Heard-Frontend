@@ -13,7 +13,29 @@ const StyledButton = styled(Button)({
   height: 100,
 });
 
-export default function AddHabit(props) {
+export default function AddHabit({ habit, name, buttonHandler }) {
+
+  // const [stopHabit, setStopHabit] = useState({
+  //   isActive: false,
+  // });
+
+  // const handleStopHabit = (habitId) => {
+  //   console.log("habitId", habitId);
+  //   fetch(`http://localhost:8080/api/habit/${habitId}/stop`, {
+  //     method: "POST",
+  //     headers: {
+  //       // "Content-Type": "application/json",
+  //       Authorization:
+  //         "$2a$10$V44dbrDO3HSoNvP61pCZoO03ihL7mZSZ4srW2mGP0HoF01KTjH1wi",
+  //     },
+  //     // body: (stopHabit),
+  //   })
+  //     .then((res) => res.text())
+  //     .then((data) => {
+  //       setStopHabit({ ...stopHabit});
+  //     });
+  // };
+
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -49,7 +71,7 @@ export default function AddHabit(props) {
               <Button
                 color="inherit"
                 size="small"
-                onClick={props.buttonHandler}
+                onClick={() => buttonHandler(habit.id)}
               >
                 Stop
               </Button>
@@ -61,7 +83,7 @@ export default function AddHabit(props) {
         </Popover>
       </StyledButton>
 
-      <StyledButton sx={{ width: 250 }}>{props.name}</StyledButton>
+      <StyledButton sx={{ width: 250 }}>{name}</StyledButton>
     </ButtonGroup>
   );
 }
