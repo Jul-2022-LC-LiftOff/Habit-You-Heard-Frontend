@@ -13,7 +13,8 @@ const StyledButton = styled(Button)({
   height: 100,
 });
 
-export default function AddHabit(props) {
+export default function AddHabit({ habit, name, buttonHandler }) {
+
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -49,7 +50,7 @@ export default function AddHabit(props) {
               <Button
                 color="inherit"
                 size="small"
-                onClick={props.buttonHandler}
+                onClick={() => buttonHandler(habit.id)}
               >
                 Stop
               </Button>
@@ -61,7 +62,7 @@ export default function AddHabit(props) {
         </Popover>
       </StyledButton>
 
-      <StyledButton sx={{ width: 250 }}>{props.name}</StyledButton>
+      <StyledButton sx={{ width: 250 }}>{name}</StyledButton>
     </ButtonGroup>
   );
 }

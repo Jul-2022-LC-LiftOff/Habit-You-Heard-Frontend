@@ -46,29 +46,18 @@ export default function HabitsPage({ habits, setHabits }) {
     description: "",
   });
 
-  const [stopHabit, setStopHabit] = useState({
-    isActive: null,
-  });
-
-  // const habit = () => {
-  //   setHabits(habits.map);
-  // };
-
-  // id is being returned as undefined
-  const handleStopHabit = () => {
-    // console.log("habit id", habits.id);
-    fetch(`http://localhost:8080/api/habit/3/stop`, {
+  const handleStopHabit = (habitId) => {
+    fetch(`http://localhost:8080/api/habit/${habitId}/stop`, {
       method: "POST",
       headers: {
-        // "Content-Type": "application/json",
         Authorization:
           "$2a$10$V44dbrDO3HSoNvP61pCZoO03ihL7mZSZ4srW2mGP0HoF01KTjH1wi",
       },
-      // body: (stopHabit),
     })
       .then((res) => res.text())
-      .then((data) => {
-        setStopHabit({ ...stopHabit, isActive: false });
+      .then(() => {
+        const newHabitArray = habits.filter((habit) => habit.id != habitId);
+        setHabits([...newHabitArray]);
       });
   };
 
@@ -160,7 +149,7 @@ export default function HabitsPage({ habits, setHabits }) {
           <Grid xs={6} display="flex" justifyContent="center">
             <AddHabit
               name={habit.name}
-              description={habit.description}
+              habit={habit}
               buttonHandler={handleStopHabit}
             ></AddHabit>
           </Grid>
