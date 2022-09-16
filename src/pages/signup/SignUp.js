@@ -109,25 +109,21 @@ const SignUp = () => {
   };
 
   const handleFetch = () => {
-    const hashedPassword = bcrypt.hashSync(user.password, salt);
-
     const newUser = {
       email: user.email,
       username: user.username,
-      password: hashedPassword,
+      password: user.password,
     };
-
-    if (newUser.password === hashedPassword) {
-      fetch("http://localhost:8080/api/user/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newUser),
-      })
-        .then((res) => res.text())
-        .then((data) => {
-          setResponse(data);
-        });
-    }
+    console.log(user.password);
+    fetch("http://localhost:8080/api/user/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newUser),
+    })
+      .then((res) => res.text())
+      .then((data) => {
+        setResponse(data);
+      });
   };
   useEffect(() => {
     if (response !== "" && response === "Created") {
