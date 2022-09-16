@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import LinkButton from "../components/LinkButton";
-import testUser from "../testData/testUser.json";
 import Stack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Unstable_Grid2";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 // import testHabits from "../testData/testHabits.json";
 import Habit from "../components/Habit";
-import Grid from "@mui/material/Unstable_Grid2";
-import { Link } from "react-router-dom";
+import LinkButton from "../components/LinkButton";
 import ThemeToggle from "../components/ThemeToggle";
 // import testUser from "../testData/testUser.json";
 
@@ -18,9 +17,8 @@ const StyledDiv = styled("div")(() => ({
   justifyContent: "center",
 }));
 
-export default function Home({ habits, onToggleTheme }) {
-
-  const [user, setUser] = useState(testUser);
+export default function Home({ habits, onToggleTheme, user }) {
+  console.log(user);
 
   const [disaffirmHabit, setDisaffirmHabit] = useState({
     completeHabit: null,
@@ -48,8 +46,9 @@ export default function Home({ habits, onToggleTheme }) {
   // };
 
   const current = new Date();
-  const date = `${current.getMonth() +
-    1}/${current.getDate()}/${current.getFullYear()}`;
+  const date = `${
+    current.getMonth() + 1
+  }/${current.getDate()}/${current.getFullYear()}`;
 
   return (
     <>
@@ -115,10 +114,10 @@ export default function Home({ habits, onToggleTheme }) {
       <Grid container spacing={2}>
         {habits.map((habit) => (
           <Grid xs={6} display="flex" justifyContent="center">
-            <Habit 
-            name={habit.name} 
-            description={habit.description}
-            // checkHandler={handleAffirmHabit}
+            <Habit
+              name={habit.name}
+              description={habit.description}
+              // checkHandler={handleAffirmHabit}
             />
           </Grid>
         ))}
