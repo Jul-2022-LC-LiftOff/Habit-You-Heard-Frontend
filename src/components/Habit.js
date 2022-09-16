@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Checkbox from "@mui/material/Checkbox";
@@ -12,8 +12,8 @@ const StyledButton = styled(Button)({
 });
 
 function Habit(props) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
+  
+  const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -27,7 +27,9 @@ function Habit(props) {
 
   return (
     <ButtonGroup variant="contained">
-      <StyledButton size="small">
+      <StyledButton size="small" onClick={props.checkHandler}>
+      {/* checked = false */}
+      {/* checked={disaffirmHabit} */}
         <Checkbox
           {...props}
           size="large"
