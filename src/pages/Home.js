@@ -1,26 +1,54 @@
-import React from "react";
-import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import LinkButton from "../components/LinkButton";
-import testUser from "../testData/testUser.json";
 import Stack from "@mui/material/Stack";
-import testHabits from "../testData/testHabits.json";
-import Habit from "../components/Habit";
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+// import testHabits from "../testData/testHabits.json";
+import Habit from "../components/Habit";
+import LinkButton from "../components/LinkButton";
+import ThemeToggle from "../components/ThemeToggle";
+// import testUser from "../testData/testUser.json";
 
 const StyledDiv = styled("div")(() => ({
   display: "flex",
   justifyContent: "center",
 }));
 
-export default function Home() {
-  
+export default function Home({ habits, onToggleTheme, user }) {
+  console.log(user);
+
+  const [disaffirmHabit, setDisaffirmHabit] = useState({
+    completeHabit: null,
+  });
+
+  // habit id undefinted
+  // const handleAffirmHabit = () => {
+  //   fetch(`http://localhost:8080/api/habit/${habits.id}/defirm`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization:
+  //         "$2a$10$0PnMZCHd.pFny4y2zTQE9e9BM8aBSuROyIt69uHzsPz16Lm8nhcYa",
+  //     },
+  //     body: JSON.stringify(disaffirmHabit),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       console.log("res", res);
+  //       setDisaffirmHabit({
+  //         ...disaffirmHabit,
+  //         completeHabit: false,
+  //       });
+  //     });
+  // };
+
   const current = new Date();
-  const date = `${current.getMonth() +
-    1}/${current.getDate()}/${current.getFullYear()}`;
+  const date = `${
+    current.getMonth() + 1
+  }/${current.getDate()}/${current.getFullYear()}`;
 
   return (
     <>
@@ -32,12 +60,13 @@ export default function Home() {
             component="div"
             sx={{ flexGrow: 1, alignSelf: "flex-start" }}
           >
-            Hello, {testUser.username}
+            Hello, {user.username}
           </Typography>
 
           <Stack direction="row" spacing={2}>
+            <ThemeToggle onToggleTheme={onToggleTheme} />
             <LinkButton to="yourprogress">Badges</LinkButton>
-            <LinkButton to="signin">Logout</LinkButton>
+            <LinkButton to="/auth/signin">Logout</LinkButton>
           </Stack>
         </Stack>
 
@@ -83,9 +112,13 @@ export default function Home() {
       </Grid>
 
       <Grid container spacing={2}>
-        {testHabits.habits.map((habit) => (
+        {habits.map((habit) => (
           <Grid xs={6} display="flex" justifyContent="center">
-            <Habit name={habit.name} description={habit.description}></Habit>
+            <Habit
+              name={habit.name}
+              description={habit.description}
+              // checkHandler={handleAffirmHabit}
+            />
           </Grid>
         ))}
       </Grid>

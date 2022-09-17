@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
-import { Typography } from "@mui/material";
-import { styled } from "@mui/system";
-import InputUnstyled from "@mui/base/InputUnstyled";
+import { TextField, Typography } from "@mui/material";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import AddHabit from "../components/AddHabit";
-import testHabits from "../testData/testHabits.json";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -19,26 +16,6 @@ import Stack from "@mui/material/Stack";
 import { ArrowBack } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-const blue = {
-  100: "#DAECFF",
-  200: "#80BFFF",
-  400: "#3399FF",
-  600: "#0072E5",
-};
-
-const grey = {
-  50: "#F3F6F9",
-  100: "#E7EBF0",
-  200: "#E0E3E7",
-  300: "#CDD2D7",
-  400: "#B2BAC2",
-  500: "#A0AAB4",
-  600: "#6F7E8C",
-  700: "#3E5060",
-  800: "#2D3843",
-  900: "#1A2027",
-};
-
 const days = [
   "Sunday",
   "Monday",
@@ -48,32 +25,6 @@ const days = [
   "Friday",
   "Saturday",
 ];
-
-const StyledInputElement = styled("input")(
-  ({ theme }) => `
-    width: 320px;
-    font-size: 1.2rem;
-    font-family: IBM Plex Sans, sans-serif;
-    font-weight: 400;
-    line-height: 2.5;
-    color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
-    background: ${theme.palette.mode === "dark" ? grey[900] : grey[50]};
-    border: 1px solid ${theme.palette.mode === "dark" ? grey[800] : grey[300]};
-    border-radius: 8px;
-    padding: 12px 12px;
-  
-    &:hover {
-      background: ${theme.palette.mode === "dark" ? "" : grey[100]};
-      border-color: ${theme.palette.mode === "dark" ? grey[700] : grey[400]};
-    }
-  
-    &:focus {
-      outline: 3px solid ${
-        theme.palette.mode === "dark" ? blue[600] : blue[100]
-      };
-    }
-  `
-);
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -86,24 +37,55 @@ const MenuProps = {
   },
 };
 
-export default function HabitsPage() {
-  const CustomInput = React.forwardRef(function CustomInput(props, ref) {
-    return (
-      <InputUnstyled
-        components={{ Input: StyledInputElement }}
-        {...props}
-        ref={ref}
-      />
-    );
+export default function HabitsPage({ habits, setHabits }) {
+  const [daysOfTheWeek, setDaysOfTheWeek] = useState([]);
+
+  const [createHabit, setCreateHabit] = useState({
+    name: "",
+    selectedDays: "",
+    description: "",
   });
 
-  const [daysOfTheWeek, setdaysOfTheWeek] = React.useState([]);
+  const handleStopHabit = (habitId) => {
+    fetch(`http://localhost:8080/api/habit/${habitId}/stop`, {
+      method: "POST",
+      headers: {
+        Authorization:
+          "$2a$10$V44dbrDO3HSoNvP61pCZoO03ihL7mZSZ4srW2mGP0HoF01KTjH1wi",
+      },
+    })
+      .then((res) => res.text())
+      .then(() => {
+        const newHabitArray = habits.filter((habit) => habit.id != habitId);
+        setHabits([...newHabitArray]);
+      });
+  };
+
+  const handleCreateHabitFetch = () => {
+    fetch("http://localhost:8080/api/habit/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "$2a$10$V44dbrDO3HSoNvP61pCZoO03ihL7mZSZ4srW2mGP0HoF01KTjH1wi",
+      },
+      body: JSON.stringify(createHabit),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setHabits([...habits, data]);
+      });
+  };
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setdaysOfTheWeek(typeof value === "string" ? value.split(",") : value);
+    setDaysOfTheWeek(typeof value === "string" ? value.split(",") : value);
+    setCreateHabit({
+      ...createHabit,
+      selectedDays: value,
+    });
   };
 
   return (
@@ -137,7 +119,7 @@ export default function HabitsPage() {
         </Link>
       </Box>
 
-      <Grid container position="relative" top="80">
+      <Grid container position="relative">
         <Grid xs={12} display="flex" justifyContent="center">
           <Box
             sx={{
@@ -163,11 +145,12 @@ export default function HabitsPage() {
       </Grid>
 
       <Grid container spacing={2} marginTop="20px">
-        {testHabits.habits.map((habit) => (
+        {habits.map((habit) => (
           <Grid xs={6} display="flex" justifyContent="center">
             <AddHabit
               name={habit.name}
-              description={habit.description}
+              habit={habit}
+              buttonHandler={handleStopHabit}
             ></AddHabit>
           </Grid>
         ))}
@@ -182,7 +165,34 @@ export default function HabitsPage() {
         }}
         direction="row"
       >
-        <CustomInput placeholder="Enter new habit here..." />
+        <TextField
+          sx={{ m: 1, width: 200, marginBottom: "25px" }}
+          id="outlined-basic"
+          label="Enter new habit name"
+          variant="outlined"
+          value={createHabit.name}
+          onChange={(e) => {
+            setCreateHabit({
+              ...createHabit,
+              name: e.target.value,
+            });
+          }}
+        />
+
+        <TextField
+          sx={{ m: 1, width: 250, marginBottom: "25px" }}
+          id="outlined-multiline-flexible"
+          label="Enter habit description"
+          multiline
+          maxRows={4}
+          value={createHabit.description}
+          onChange={(e) => {
+            setCreateHabit({
+              ...createHabit,
+              description: e.target.value,
+            });
+          }}
+        />
 
         <div>
           <FormControl sx={{ m: 1, width: 150, marginBottom: "25px" }}>
@@ -207,7 +217,7 @@ export default function HabitsPage() {
           </FormControl>
         </div>
 
-        <Fab color="primary">
+        <Fab color="primary" onClick={handleCreateHabitFetch}>
           <AddIcon />
         </Fab>
       </Stack>
