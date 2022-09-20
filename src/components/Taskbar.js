@@ -12,12 +12,12 @@ const StyledDiv = styled("div")(() => ({
     justifyContent: "center",
   }));
 
-export default function Taskbar({points, contentType}){
+export default function Taskbar({points, contentType, name}){
     let bubbleContent;
     let bubbleLink;
     if(contentType === "date"){
         const current = new Date();
-        bubbleContent = `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`;
+        bubbleContent = () => `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`;
         bubbleLink = "calendar";
     } else if (contentType === "points"){
         bubbleContent = () => {return (<><u>Points</u><br/>{points}</>);}
@@ -33,7 +33,7 @@ export default function Taskbar({points, contentType}){
             component="div"
             sx={{ flexGrow: 1, alignSelf: "flex-start" }}
           >
-            Hello, {testUser.username}
+            Hello, {name}
           </Typography>
           <Stack direction="row" spacing={2}>
             <LinkButton to="..">Home</LinkButton>
