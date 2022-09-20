@@ -1,9 +1,8 @@
 import React from 'react';
-
+import HabitCalendar from '../components/HabitCalendar.js'
+import Taskbar from '../components/Taskbar.js';
 const CalendarView = () => {
-    return <h1>This is where the calendar will be.</h1>;
+    return (<><Taskbar contentType="date" ></Taskbar><HabitCalendar/></>);
   };
-  
-  export default CalendarView;
 
- 
+  export default CalendarView;

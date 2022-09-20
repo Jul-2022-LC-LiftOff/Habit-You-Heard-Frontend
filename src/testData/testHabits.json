@@ -3,49 +3,19 @@
         {
             "id" : 0,
             "name" : "Read a book every day.",
-            "description" : "I can read 20 pages in a book every day."
+            "start" : "",
+            "description" : "I can read 20 pages in a book every day.",
+            "selectedDays" : ["Monday", "Tuesday", "Friday"]
         },
         
         {
             "id" : 1,
             "name" : "Water the garden.",
-            "description" : "Make sure the plants aren't thirsty."
-        },
-
-        {
-            "id" : 2,
-            "name" : "Cardio workout.",
-            "description" : "Jog a mile under 10 minutes."
-        },
-
-        {
-            "id" : 3,
-            "name" : "Learn how to cook something new.",
-            "description" : "Eating toast and eggs every day is pretty boring."
-        },
-
-        {
-            "id" : 4,
-            "name" : "h.",
-            "description" : "some example description."
-        },
-
-        {
-            "id" : 5,
-            "name" : "Some example habit that is very long just to test how many words I can fit in a habit name before it looks really weird.",
-            "description" : "some example description."
-        },
-
-        {
-            "id" : 6,
-            "name" : "Feed the cat.",
-            "description" : "You should also probably feed the cat."
-        },
-
-        {
-            "id" : 7,
-            "name" : "Feed the dog.",
-            "description" : "Make sure the dog isn't hungry."
+            "start" : "",
+            "description" : "Make sure the plants aren't thirsty.",
+            "selectedDays" : ["Monday", "Tuesday", "Friday"]
         }
+
+        
     ]
 }

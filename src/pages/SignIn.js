@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import AuthLayout from "../components/layouts/AuthLayout";
 
-export default function SignInSide() {
+export default function SignInSide(props) {
   const navigate = useNavigate();
   const [token, setToken] = useState("");
   const [loginClicked, setLoginClicked] = useState(false);
@@ -13,7 +13,7 @@ export default function SignInSide() {
   const [passwordHelperText, setPasswordHelperText] = useState("");
   const [usernameHelperText, setUsernameHelperText] = useState("");
 
-  const [user, setUser] = useState({
+  const [userLoggingIn, setUserLoggingIn] = useState({
     email: "",
     username: "",
     password: "",
@@ -23,7 +23,7 @@ export default function SignInSide() {
     return await fetch("http://localhost:8080/api/auth/assign/token", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
+      body: JSON.stringify(userLoggingIn),
     }).then((res) => res.json());
   }
 
@@ -32,9 +32,10 @@ export default function SignInSide() {
   const handleLogin = () => {
     fetchToken().then((response) => {
       if (response.token) {
-        console.log(response.token);
+        console.log("response", response);
         setPasswordHelperText("");
         setUsernameHelperText("");
+        props.setUser(response);
         navigate("/");
       } else if (response.errorMessage) {
         if (response.errorMessage === "Invalid Password") {
@@ -62,11 +63,11 @@ export default function SignInSide() {
         <TextField
           label="Username"
           variant="standard"
-          value={user.username}
+          value={userLoggingIn.username}
           onChange={(e) => {
             let updatedValue = { username: e.target.value };
-            setUser((user) => ({
-              ...user,
+            setUserLoggingIn((userLoggingIn) => ({
+              ...userLoggingIn,
               ...updatedValue,
             }));
           }}
@@ -77,11 +78,11 @@ export default function SignInSide() {
           label="Password"
           variant="standard"
           type="password"
-          value={user.password}
+          value={userLoggingIn.password}
           onChange={(e) => {
             let updatedValue = { password: e.target.value };
-            setUser((user) => ({
-              ...user,
+            setUserLoggingIn((userLoggingIn) => ({
+              ...userLoggingIn,
               ...updatedValue,
             }));
           }}
