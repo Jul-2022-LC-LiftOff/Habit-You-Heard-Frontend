@@ -67,8 +67,8 @@ function App() {
               }
             />
 
-            <Route path="yourprogress" element={<YourProgress />} />
-            <Route path="calendar" element={<CalendarView habits={habits} />} />
+            <Route path="yourprogress" element={<YourProgress user={user} habits={habits}/>} />
+            <Route path="calendar" element={<CalendarView user={user} habits={habits} />} />
             <Route
               path="habitsPage"
               element={
