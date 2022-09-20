@@ -16,7 +16,7 @@ function DataConversion(habits) {
   let habitsArray = [];
   for (let i = 0; i < habits.length; i++) {
     habitsArray[i] = {};
-    habitsArray[i].startRecur = habits[i].start;
+    habitsArray[i].startRecur = habits[i].startDate;
     habitsArray[i].title = habits[i].name;
     habitsArray[i].daysOfWeek = habits[i].selectedDays.map((day) => {
       return daysCheckArray.indexOf(day);

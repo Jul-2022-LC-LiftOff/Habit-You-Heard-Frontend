@@ -17,7 +17,7 @@ const StyledDiv = styled("div")(() => ({
   justifyContent: "center",
 }));
 
-export default function Home({ habits, onToggleTheme, user }) {
+export default function Home({ habits, onToggleTheme, user, darkMode}) {
   console.log(user);
 
   const [disaffirmHabit, setDisaffirmHabit] = useState({
@@ -64,7 +64,7 @@ export default function Home({ habits, onToggleTheme, user }) {
           </Typography>
 
           <Stack direction="row" spacing={2}>
-            <ThemeToggle onToggleTheme={onToggleTheme} />
+            <ThemeToggle darkMode={darkMode} onToggleTheme={onToggleTheme} />
             <LinkButton to="yourprogress">Badges</LinkButton>
             <LinkButton to="/auth/signin">Logout</LinkButton>
           </Stack>

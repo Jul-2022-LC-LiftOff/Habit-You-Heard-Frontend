@@ -6,22 +6,23 @@ import Typography from "@mui/material/Typography";
 import LinkButton from "./LinkButton";
 import testUser from "../testData/testUser.json";
 import Stack from "@mui/material/Stack";
+import { Link } from "react-router-dom"
 
 const StyledDiv = styled("div")(() => ({
     display: "flex",
     justifyContent: "center",
   }));
 
-export default function Taskbar({points, contentType}){
+export default function Taskbar({points, contentType, name}){
     let bubbleContent;
     let bubbleLink;
     if(contentType === "date"){
         const current = new Date();
-        bubbleContent = `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`;
-        bubbleLink = "calendar";
+        bubbleContent = () => `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`;
+        bubbleLink = "/calendar";
     } else if (contentType === "points"){
         bubbleContent = () => {return (<><u>Points</u><br/>{points}</>);}
-        bubbleLink = "habitsPage";
+        bubbleLink = "/habitsPage";
     }
 
     return (
@@ -33,16 +34,16 @@ export default function Taskbar({points, contentType}){
             component="div"
             sx={{ flexGrow: 1, alignSelf: "flex-start" }}
           >
-            Hello, {testUser.username}
+            Hello, {name}
           </Typography>
           <Stack direction="row" spacing={2}>
-            <LinkButton to="..">Home</LinkButton>
-            <LinkButton to="yourprogress">Badges</LinkButton>
-            <LinkButton to="signin">Logout</LinkButton>
+            <LinkButton to="/">Home</LinkButton>
+            <LinkButton to="/yourprogress">Badges</LinkButton>
+            <LinkButton to="/auth/signin">Logout</LinkButton>
           </Stack>
         </Stack>
 
-        <a href={bubbleLink} textDecoration="none">
+        <Link to={bubbleLink} textDecoration="none">
           <StyledDiv>
             <Box
               sx={{
@@ -68,7 +69,7 @@ export default function Taskbar({points, contentType}){
               </Typography>
             </Box>
           </StyledDiv>
-        </a>
+        </Link>
       </AppBar>
     );
 }
