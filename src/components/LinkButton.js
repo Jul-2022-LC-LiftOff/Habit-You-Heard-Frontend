@@ -9,14 +9,9 @@ const StyledLink = styled(Link)({
 
 function LinkButton(props) {
     return (
-        <>
-            <a href={props.to}>
-                <Button variant='contained' {...props}>{props.children}</Button>
-            </a>
-                    {/*<StyledLink to={props.to}>
+        <StyledLink to={props.to}>
             <Button variant='contained' {...props}>{props.children}</Button>
-        </StyledLink>*/}
-        </>
+        </StyledLink>
     )
 }
 
