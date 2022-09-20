@@ -1,6 +1,6 @@
-import dayGridPlugin from "@fullcalendar/daygrid";
-import FullCalendar from "@fullcalendar/react";
 import React from "react";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
 
 let daysCheckArray = [
   "Sunday",
@@ -35,7 +35,7 @@ function renderEventContent(eventInfo) {
 }
 
 function HabitCalendar({ habits }) {
-  let habitsArray = DataConversion(habits);
+  let habitsArray = habits && DataConversion(habits);
   return (
     <FullCalendar
       selectable={true}
