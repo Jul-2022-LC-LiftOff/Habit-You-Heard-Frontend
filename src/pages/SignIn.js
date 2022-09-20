@@ -32,7 +32,7 @@ export default function SignInSide(props) {
   const handleLogin = () => {
     fetchToken().then((response) => {
       if (response.token) {
-        console.log(response.token);
+        console.log("response", response);
         setPasswordHelperText("");
         setUsernameHelperText("");
         props.setUser(response);

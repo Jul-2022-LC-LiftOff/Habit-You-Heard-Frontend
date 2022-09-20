@@ -30,13 +30,16 @@ function App() {
 
   useEffect(() => {
     fetchHabits();
-  }, []);
+  }, [user]);
+
+  useEffect(() => {
+    console.log("user", user);
+  }, [user]);
 
   const fetchHabits = () => {
     fetch("http://localhost:8080/api/habits/", {
       headers: {
-        Authorization:
-          "$2a$10$V44dbrDO3HSoNvP61pCZoO03ihL7mZSZ4srW2mGP0HoF01KTjH1wi",
+        Authorization: user.token,
       },
     })
       .then((response) => {
@@ -65,15 +68,11 @@ function App() {
             />
 
             <Route path="yourprogress" element={<YourProgress />} />
-            <Route path="calendar" element={<CalendarView />} />
+            <Route path="calendar" element={<CalendarView habits={habits} />} />
             <Route
               path="habitsPage"
               element={
-                <HabitsPage
-                  user={testUser}
-                  habits={habits}
-                  setHabits={setHabits}
-                />
+                <HabitsPage user={user} habits={habits} setHabits={setHabits} />
               }
             />
             <Route path="OpportunitiesPage" element={<OpportunitiesPage />} />

@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Unstable_Grid2";
-import { TextField, Typography } from "@mui/material";
-import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
-import AddHabit from "../components/AddHabit";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import ListItemText from "@mui/material/ListItemText";
-import Select from "@mui/material/Select";
-import Checkbox from "@mui/material/Checkbox";
-import Stack from "@mui/material/Stack";
 import { ArrowBack } from "@mui/icons-material";
+import AddIcon from "@mui/icons-material/Add";
+import { TextField, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Checkbox from "@mui/material/Checkbox";
+import Fab from "@mui/material/Fab";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import ListItemText from "@mui/material/ListItemText";
+import MenuItem from "@mui/material/MenuItem";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Select from "@mui/material/Select";
+import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Unstable_Grid2";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import AddHabit from "../components/AddHabit";
 
 const days = [
   "Sunday",
@@ -37,7 +37,7 @@ const MenuProps = {
   },
 };
 
-export default function HabitsPage({ habits, setHabits }) {
+export default function HabitsPage({ habits, setHabits, user }) {
   const [daysOfTheWeek, setDaysOfTheWeek] = useState([]);
 
   const [createHabit, setCreateHabit] = useState({
@@ -50,8 +50,7 @@ export default function HabitsPage({ habits, setHabits }) {
     fetch(`http://localhost:8080/api/habit/${habitId}/stop`, {
       method: "POST",
       headers: {
-        Authorization:
-          "$2a$10$V44dbrDO3HSoNvP61pCZoO03ihL7mZSZ4srW2mGP0HoF01KTjH1wi",
+        Authorization: user.token,
       },
     })
       .then((res) => res.text())
@@ -66,8 +65,7 @@ export default function HabitsPage({ habits, setHabits }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "$2a$10$V44dbrDO3HSoNvP61pCZoO03ihL7mZSZ4srW2mGP0HoF01KTjH1wi",
+        Authorization: user.token,
       },
       body: JSON.stringify(createHabit),
     })
