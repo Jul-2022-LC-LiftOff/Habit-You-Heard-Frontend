@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import LinkButton from "./LinkButton";
 import testUser from "../testData/testUser.json";
 import Stack from "@mui/material/Stack";
+import { Link } from "react-router-dom"
 
 const StyledDiv = styled("div")(() => ({
     display: "flex",
@@ -18,10 +19,10 @@ export default function Taskbar({points, contentType, name}){
     if(contentType === "date"){
         const current = new Date();
         bubbleContent = () => `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`;
-        bubbleLink = "calendar";
+        bubbleLink = "/calendar";
     } else if (contentType === "points"){
         bubbleContent = () => {return (<><u>Points</u><br/>{points}</>);}
-        bubbleLink = "habitsPage";
+        bubbleLink = "/habitsPage";
     }
 
     return (
@@ -36,13 +37,13 @@ export default function Taskbar({points, contentType, name}){
             Hello, {name}
           </Typography>
           <Stack direction="row" spacing={2}>
-            <LinkButton to="..">Home</LinkButton>
-            <LinkButton to="yourprogress">Badges</LinkButton>
-            <LinkButton to="signin">Logout</LinkButton>
+            <LinkButton to="/">Home</LinkButton>
+            <LinkButton to="/yourprogress">Badges</LinkButton>
+            <LinkButton to="/auth/signin">Logout</LinkButton>
           </Stack>
         </Stack>
 
-        <a href={bubbleLink} textDecoration="none">
+        <Link to={bubbleLink} textDecoration="none">
           <StyledDiv>
             <Box
               sx={{
@@ -68,7 +69,7 @@ export default function Taskbar({points, contentType, name}){
               </Typography>
             </Box>
           </StyledDiv>
-        </a>
+        </Link>
       </AppBar>
     );
 }
