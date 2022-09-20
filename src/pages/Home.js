@@ -18,7 +18,6 @@ const StyledDiv = styled("div")(() => ({
 }));
 
 export default function Home({ habits, onToggleTheme, user, darkMode}) {
-  console.log(user);
 
   const [disaffirmHabit, setDisaffirmHabit] = useState({
     completeHabit: null,
