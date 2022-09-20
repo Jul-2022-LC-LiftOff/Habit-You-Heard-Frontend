@@ -6,22 +6,21 @@ import Typography from "@mui/material/Typography";
 import LinkButton from "./LinkButton";
 import testUser from "../testData/testUser.json";
 import Stack from "@mui/material/Stack";
-import { Link } from "react-router-dom";
 
 const StyledDiv = styled("div")(() => ({
     display: "flex",
     justifyContent: "center",
   }));
 
-export default function Taskbar(props){
+export default function Taskbar({points, contentType}){
     let bubbleContent;
     let bubbleLink;
-    if(props.contentType === "date"){
+    if(contentType === "date"){
         const current = new Date();
         bubbleContent = `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`;
         bubbleLink = "calendar";
-    } else if (props.contentType === "points"){
-        bubbleContent = `${props.points} Points`;
+    } else if (contentType === "points"){
+        bubbleContent = () => {return (<><u>Points</u><br/>{points}</>);}
         bubbleLink = "habitsPage";
     }
 
@@ -61,10 +60,11 @@ export default function Taskbar(props){
               <Typography
                 sx={{
                   color: "#fafafa",
-                  fontSize: 25,
+                  fontSize: 28,
+                  textAlign:"center"
                 }}
               >
-                {bubbleContent}
+                {bubbleContent()}
               </Typography>
             </Box>
           </StyledDiv>
