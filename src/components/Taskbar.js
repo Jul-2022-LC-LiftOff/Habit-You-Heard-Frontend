@@ -6,23 +6,23 @@ import Typography from "@mui/material/Typography";
 import LinkButton from "./LinkButton";
 import testUser from "../testData/testUser.json";
 import Stack from "@mui/material/Stack";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 const StyledDiv = styled("div")(() => ({
     display: "flex",
     justifyContent: "center",
   }));
 
-export default function Taskbar(props){
+export default function Taskbar({points, contentType, name}){
     let bubbleContent;
     let bubbleLink;
-    if(props.contentType === "date"){
+    if(contentType === "date"){
         const current = new Date();
-        bubbleContent = `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`;
-        bubbleLink = "calendar";
-    } else if (props.contentType === "points"){
-        bubbleContent = `${props.points} Points`;
-        bubbleLink = "habitsPage";
+        bubbleContent = () => `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`;
+        bubbleLink = "/calendar";
+    } else if (contentType === "points"){
+        bubbleContent = () => {return (<><u>Points</u><br/>{points}</>);}
+        bubbleLink = "/habitsPage";
     }
 
     return (
@@ -34,16 +34,16 @@ export default function Taskbar(props){
             component="div"
             sx={{ flexGrow: 1, alignSelf: "flex-start" }}
           >
-            Hello, {testUser.username}
+            Hello, {name}
           </Typography>
           <Stack direction="row" spacing={2}>
-            <LinkButton to="..">Home</LinkButton>
-            <LinkButton to="yourprogress">Badges</LinkButton>
-            <LinkButton to="signin">Logout</LinkButton>
+            <LinkButton to="/">Home</LinkButton>
+            <LinkButton to="/yourprogress">Badges</LinkButton>
+            <LinkButton to="/auth/signin">Logout</LinkButton>
           </Stack>
         </Stack>
 
-        <a href={bubbleLink} textDecoration="none">
+        <Link to={bubbleLink} textDecoration="none">
           <StyledDiv>
             <Box
               sx={{
@@ -61,14 +61,15 @@ export default function Taskbar(props){
               <Typography
                 sx={{
                   color: "#fafafa",
-                  fontSize: 25,
+                  fontSize: 28,
+                  textAlign:"center"
                 }}
               >
-                {bubbleContent}
+                {bubbleContent()}
               </Typography>
             </Box>
           </StyledDiv>
-        </a>
+        </Link>
       </AppBar>
     );
 }

@@ -3,17 +3,89 @@
         {
             "id" : 0,
             "name" : "Read a book every day.",
-            "start" : "",
             "description" : "I can read 20 pages in a book every day.",
-            "selectedDays" : ["Monday", "Tuesday", "Friday"]
+            "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "pointValue" : 1000,
+            "streak" : 42,
+            "start" : ""
         },
         
         {
             "id" : 1,
             "name" : "Water the garden.",
-            "start" : "",
             "description" : "Make sure the plants aren't thirsty.",
-            "selectedDays" : ["Monday", "Tuesday", "Friday"]
+            "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "pointValue" : 500,
+            "streak" : 42
+        },
+
+        {
+            "id" : 2,
+            "name" : "Cardio workout.",
+            "description" : "Jog a mile under 10 minutes.",
+            "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "pointValue" : 0,
+            "streak" : 42
+        },
+
+        {
+            "id" : 3,
+            "name" : "Learn how to cook something new.",
+            "description" : "Eating toast and eggs every day is pretty boring.",
+            "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "pointValue" : 1500,
+            "streak" : 42
+        },
+
+        {
+            "id" : 4,
+            "name" : "h.",
+            "description" : "some example description.",
+            "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "pointValue" : 2000,
+            "streak" : 42
+        },
+
+        {
+            "id" : 5,
+            "name" : "Some example habit that is very long just to test how many words I can fit in a habit name before it looks really weird.",
+            "description" : "some example description.",
+            "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "pointValue" : 2500
+        },
+
+        {
+            "id" : 6,
+            "name" : "Feed the cat.",
+            "description" : "You should also probably feed the cat.",
+            "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "pointValue" : 3000,
+            "streak" : 42
+        },
+
+        {
+            "id" : 7,
+            "name" : "Feed the dog.",
+            "description" : "Make sure the dog isn't hungry.",
+            "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "pointValue" : 3500,
+            "streak" : 42
+        }, 
+        {
+            "id" : 8,
+            "name" : "Stop smoking.",
+            "description" : "Don't inhale.",
+            "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "pointValue" : 4000,
+            "streak" : 42
+        },
+        {
+            "id" : 9,
+            "name" : "Do a thing so that this array gets a bit longer.",
+            "description" : "et's ust do a lon gtest to make sure that we can make this description really long and it still looks alright, I mean I don't expect it to be able to that's why I'm not even bothering to type well.",
+            "selectedDays" : ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "streak" : 42,
+            "start" : ""
         }
 
         
