@@ -63,6 +63,7 @@ function App() {
                   onToggleTheme={handleToggleTheme}
                   user={user}
                   habits={habits}
+                  darkMode={darkMode}
                 />
               }
             />
