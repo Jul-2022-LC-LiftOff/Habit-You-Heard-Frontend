@@ -53,9 +53,8 @@ const ListBox = () => {return(
   </>
 )};
 //TODO: remove placeholder user in taskbar.
-const YourProgress = () => {
+const YourProgress = ({habits}) => {
     let listUsers = Users.users;
-    let listHabits = Habits.habits;
       return (
       <Paper sx={{backgroundImage: `url(background3.png)`,
                   backgroundSize: "cover",
@@ -65,7 +64,7 @@ const YourProgress = () => {
                   minHeight: "1"}}>
         <Taskbar contentType="points" points={listUsers[0].points}></Taskbar>
         <Grid container spacing={10} marginTop="70px" justifyContent="center">
-            {listHabits.map((habit) => (
+            {habits.map((habit) => (
                 <HabitBadgeProgress 
                   title={habit.name}
                   description={habit.description}
