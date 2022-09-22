@@ -5,11 +5,15 @@ import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 // import testHabits from "../testData/testHabits.json";
 import Habit from "../components/Habit";
 import LinkButton from "../components/LinkButton";
+import SignoutButton from "../components/SignoutButton";
 import ThemeToggle from "../components/ThemeToggle";
+
+
 // import testUser from "../testData/testUser.json";
 
 const StyledDiv = styled("div")(() => ({
@@ -17,7 +21,10 @@ const StyledDiv = styled("div")(() => ({
   justifyContent: "center",
 }));
 
-export default function Home({ habits, onToggleTheme, user, darkMode}) {
+
+export default function Home({ habits, setHabits, onToggleTheme, user, setUser, darkMode}) {
+  console.log(user);
+
 
   const [disaffirmHabit, setDisaffirmHabit] = useState({
     completeHabit: null,
@@ -49,6 +56,17 @@ export default function Home({ habits, onToggleTheme, user, darkMode}) {
     current.getMonth() + 1
   }/${current.getDate()}/${current.getFullYear()}`;
 
+
+  function handleSignout(){
+    setUser({token: ""})
+    setHabits([])
+    navigate("/auth/signin")
+    
+  }
+  const navigate = useNavigate();
+
+
+
   return (
     <>
       <AppBar sx={{ marginBottom: "15px" }} position="static">
@@ -65,7 +83,7 @@ export default function Home({ habits, onToggleTheme, user, darkMode}) {
           <Stack direction="row" spacing={2}>
             <ThemeToggle darkMode={darkMode} onToggleTheme={onToggleTheme} />
             <LinkButton to="yourprogress">Badges</LinkButton>
-            <LinkButton to="/auth/signin">Logout</LinkButton>
+            <SignoutButton to="/auth/signin" onClick={() => handleSignout()}>Logout</SignoutButton>
           </Stack>
         </Stack>
 

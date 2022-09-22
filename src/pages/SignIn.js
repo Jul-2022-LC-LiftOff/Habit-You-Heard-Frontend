@@ -12,7 +12,7 @@ export default function SignInSide(props) {
   const [usernameNotFound, setUsernameNotFound] = useState(false);
   const [passwordHelperText, setPasswordHelperText] = useState("");
   const [usernameHelperText, setUsernameHelperText] = useState("");
-
+  // console.log(props.user, props.habits)
   const [userLoggingIn, setUserLoggingIn] = useState({
     email: "",
     username: "",
