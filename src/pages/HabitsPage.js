@@ -86,6 +86,17 @@ export default function HabitsPage({ habits, setHabits, user }) {
     });
   };
 
+  const handleClearOnSubmit = (event) => {
+    event.preventDefault();
+
+    setCreateHabit({
+      name: "",
+      description: "",
+    });
+
+    setDaysOfTheWeek([]);
+  };
+
   return (
     <>
       <Box
@@ -154,71 +165,73 @@ export default function HabitsPage({ habits, setHabits, user }) {
         ))}
       </Grid>
 
-      <Stack
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          position: "relative",
-          top: 20,
-        }}
-        direction="row"
-      >
-        <TextField
-          sx={{ m: 1, width: 200, marginBottom: "25px" }}
-          id="outlined-basic"
-          label="Enter new habit name"
-          variant="outlined"
-          value={createHabit.name}
-          onChange={(e) => {
-            setCreateHabit({
-              ...createHabit,
-              name: e.target.value,
-            });
+      <form onSubmit={handleClearOnSubmit}>
+        <Stack
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            position: "relative",
+            top: 20,
           }}
-        />
+          direction="row"
+        >
+          <TextField
+            sx={{ m: 1, width: 200, marginBottom: "25px" }}
+            id="outlined-basic"
+            label="Enter new habit name"
+            variant="outlined"
+            value={createHabit.name}
+            onChange={(e) => {
+              setCreateHabit({
+                ...createHabit,
+                name: e.target.value,
+              });
+            }}
+          />
 
-        <TextField
-          sx={{ m: 1, width: 250, marginBottom: "25px" }}
-          id="outlined-multiline-flexible"
-          label="Enter habit description"
-          multiline
-          maxRows={4}
-          value={createHabit.description}
-          onChange={(e) => {
-            setCreateHabit({
-              ...createHabit,
-              description: e.target.value,
-            });
-          }}
-        />
+          <TextField
+            sx={{ m: 1, width: 250, marginBottom: "25px" }}
+            id="outlined-multiline-flexible"
+            label="Enter habit description"
+            multiline
+            maxRows={4}
+            value={createHabit.description}
+            onChange={(e) => {
+              setCreateHabit({
+                ...createHabit,
+                description: e.target.value,
+              });
+            }}
+          />
 
-        <div>
-          <FormControl sx={{ m: 1, width: 150, marginBottom: "25px" }}>
-            <InputLabel id="multiple-checkbox-label">Day(s)</InputLabel>
-            <Select
-              labelId="multiple-checkbox-label"
-              id="multiple-checkbox"
-              multiple
-              value={daysOfTheWeek}
-              onChange={handleChange}
-              input={<OutlinedInput label="Tag" />}
-              renderValue={(selected) => selected.join(", ")}
-              MenuProps={MenuProps}
-            >
-              {days.map((day) => (
-                <MenuItem key={day} value={day}>
-                  <Checkbox checked={daysOfTheWeek.indexOf(day) > -1} />
-                  <ListItemText primary={day} />
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
+          <div>
+            <FormControl sx={{ m: 1, width: 150, marginBottom: "25px" }}>
+              <InputLabel id="multiple-checkbox-label">Day(s)</InputLabel>
+              <Select
+                labelId="multiple-checkbox-label"
+                id="multiple-checkbox"
+                multiple
+                value={daysOfTheWeek}
+                onChange={handleChange}
+                input={<OutlinedInput label="Tag" />}
+                renderValue={(selected) => selected.join(", ")}
+                MenuProps={MenuProps}
+              >
+                {days.map((day) => (
+                  <MenuItem key={day} value={day}>
+                    <Checkbox checked={daysOfTheWeek.indexOf(day) > -1} />
+                    <ListItemText primary={day} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
 
-        <Fab color="primary" onClick={handleCreateHabitFetch}>
-          <AddIcon />
-        </Fab>
-      </Stack>
+          <Fab type="submit" color="primary" onClick={handleCreateHabitFetch}>
+            <AddIcon />
+          </Fab>
+        </Stack>
+      </form>
     </>
   );
 }

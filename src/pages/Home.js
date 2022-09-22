@@ -21,8 +21,10 @@ const StyledDiv = styled("div")(() => ({
   justifyContent: "center",
 }));
 
+
 export default function Home({ habits, setHabits, onToggleTheme, user, setUser, darkMode}) {
   console.log(user);
+
 
   const [disaffirmHabit, setDisaffirmHabit] = useState({
     completeHabit: null,
