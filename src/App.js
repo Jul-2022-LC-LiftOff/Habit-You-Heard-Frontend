@@ -71,8 +71,20 @@ function App() {
               
             />
 
-            <Route path="yourprogress" element={<YourProgress user={user} habits={habits} darkMode={darkMode} onToggleTheme={handleToggleTheme}/>} />
-            <Route path="calendar" element={<CalendarView user={user} habits={habits} />} />
+            <Route path="yourprogress" element={<YourProgress 
+              user={user} 
+              habits={habits} 
+              darkMode={darkMode} 
+              onToggleTheme={handleToggleTheme}
+              setUser={setUser}
+              setHabits={setHabits}/>} />
+            <Route path="calendar" element={<CalendarView 
+              user={user} 
+              habits={habits}
+              darkMode={darkMode}
+              onToggleTheme={handleToggleTheme}
+              setUser={setUser}
+              setHabits={setHabits} />} />
             <Route
               path="habitsPage"
               element={

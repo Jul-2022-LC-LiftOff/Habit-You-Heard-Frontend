@@ -40,7 +40,7 @@ const getStreakMessage = (streak) => {
 }
 
 //TODO: remove placeholder user in taskbar.
-const YourProgress = ({habits, user, darkMode, onToggleTheme}) => {
+const YourProgress = ({habits, user, darkMode, onToggleTheme, setHabits, setUser}) => {
   console.log(user);
       return (
       <Paper sx={{backgroundImage: `url(backgroun.png)`,
@@ -50,7 +50,12 @@ const YourProgress = ({habits, user, darkMode, onToggleTheme}) => {
                   minxWidth: "100vw",
                   minHeight: "100vh"}}>
         {/*<Taskbar contentType="points" name={user.username} points={user.points}></Taskbar>*/}
-        <BackButtonBar points={user.points} darkMode={darkMode} onToggleTheme={onToggleTheme}></BackButtonBar>
+        <BackButtonBar 
+          points={user.points}
+          darkMode={darkMode} 
+          onToggleTheme={onToggleTheme}
+          setUser={setUser}
+          setHabits={setHabits}/>
         <Grid container spacing={10} marginTop="70px" justifyContent="center">
             {habits.map((habit) => (
                 <HabitBadgeProgress 

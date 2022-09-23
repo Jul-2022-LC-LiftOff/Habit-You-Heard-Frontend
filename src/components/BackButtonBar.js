@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack"
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { ArrowBack } from "@mui/icons-material";
 import LinkButton from "./LinkButton";
 import { Grid } from "@mui/material";
@@ -15,8 +15,12 @@ const StyledDiv = styled("div")(() => ({
     justifyContent: "center",
   }));
 
-export default function BackButtonBar({points, darkMode, onToggleTheme}){
-    
+export default function BackButtonBar({points, darkMode, onToggleTheme, setUser, setHabits}){
+    function handleSignout(){
+        setUser({token: ""})
+        setHabits([])
+        Navigate("/auth/signin")
+    }
     return (
     <Grid container alignItems="flex-start" xs={12}>
         <Grid xs={4}>
@@ -81,7 +85,7 @@ export default function BackButtonBar({points, darkMode, onToggleTheme}){
         <Grid xs={4}>
             <Stack direction="row" spacing={2} justifyContent="flex-end">
                 <ThemeToggle darkMode={darkMode} onToggleTheme={onToggleTheme} />
-                <LinkButton to="/auth/signin">Logout</LinkButton>
+                <SignoutButton to="/auth/signin" onclick={()=>{handleSignout()}}>Logout</SignoutButton>
             </Stack>
         </Grid>
     </Grid>);
