@@ -24,10 +24,6 @@ const StyledDiv = styled("div")(() => ({
 
 export default function Home({ habits, setHabits, onToggleTheme, user, setUser, darkMode}) {
 
-  const [habitAffirmation, setHabitAffirmation] = useState({
-    completeHabit: null,
-  });
-
   const current = new Date();
   const date = `${
     current.getMonth() + 1
@@ -37,47 +33,24 @@ export default function Home({ habits, setHabits, onToggleTheme, user, setUser, 
 
   const todaysHabits = habits.filter((habit) => habit.selectedDays.includes(days[current.getDay()]));
 
-  const handleAffirmHabit = (habitId) => {
-    console.log("Will this hit.");
-    fetch(`http://localhost:8080/api/habit/21/affirm`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: user.token,
-      },
-      body: JSON.stringify(habitAffirmation),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log("res", res);
-        setHabitAffirmation({
-          ...habitAffirmation,
-          completeHabit: true,
-        });
-      });
-  };
-
-  const handleDefirmHabit = (habitId) => {
-    fetch(`http://localhost:8080/api/habit/21/defirm`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: user.token,
-      },
-      body: JSON.stringify(habitAffirmation),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log("res", res);
-        setHabitAffirmation({
-          ...habitAffirmation,
-          completeHabit: false,
-        });
-      });
-  };
-
-
-
+  // const handleDefirmHabit = (habitId) => {
+  //   fetch(`http://localhost:8080/api/habit/21/defirm`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: user.token,
+  //     },
+  //     body: JSON.stringify(habitAffirmation),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       console.log("res", res);
+  //       setHabitAffirmation({
+  //         ...habitAffirmation,
+  //         completeHabit: false,
+  //       });
+  //     });
+  // };
 
   function handleSignout(){
     setUser({token: ""})
@@ -149,9 +122,10 @@ export default function Home({ habits, setHabits, onToggleTheme, user, setUser, 
         {todaysHabits.map((habit) => (
           <Grid xs={6} display="flex" justifyContent="center">
             <Habit
-              name={habit.name}
-              description={habit.description}
-              // checkHandler={handleAffirmHabit}
+              habit={habit}
+              setHabits={setHabits}
+              habits={habits}
+              user={user}
             />
           </Grid>
         ))}
