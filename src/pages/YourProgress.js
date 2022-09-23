@@ -41,7 +41,7 @@ const getStreakMessage = (streak) => {
 
 //TODO: remove placeholder user in taskbar.
 const YourProgress = ({habits, user, darkMode, onToggleTheme, setHabits, setUser}) => {
-  console.log(user);
+  console.log(user, habits);
       return (
       <Paper sx={{backgroundImage: `url(backgroun.png)`,
                   backgroundSize: "cover",

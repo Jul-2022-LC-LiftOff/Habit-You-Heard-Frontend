@@ -28,11 +28,13 @@ function Habit({ checkmarkHandler, checkDefirmHandler, habit, name, description 
 
   return (
     <ButtonGroup variant="contained">
-      <StyledButton size="small" onClick={props.checkHandler}>
+      <StyledButton size="small" onClick={checkmarkHandler}>
       {/* checked = false */}
       {/* checked={disaffirmHabit} */}
         <Checkbox
-          {...props}
+          habit={habit}
+          name={name}
+          description={description}
           size="large"
           sx={{
             color: pink[800],
@@ -43,7 +45,7 @@ function Habit({ checkmarkHandler, checkDefirmHandler, habit, name, description 
         />
       </StyledButton>
       <StyledButton sx={{ width: 250 }} onClick={handleClick}>
-        {props.name}
+        {name}
       </StyledButton>
       <Popover
         id={id}
@@ -55,7 +57,7 @@ function Habit({ checkmarkHandler, checkDefirmHandler, habit, name, description 
           horizontal: "left",
         }}
       >
-        <Typography sx={{ p: 2 }}>{props.description}</Typography>
+        <Typography sx={{ p: 2 }}>{description}</Typography>
       </Popover>
     </ButtonGroup>
   );

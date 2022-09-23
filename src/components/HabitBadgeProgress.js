@@ -17,7 +17,7 @@ const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, }) => 
     return (
     <Grid xs={10} md={3.5}>
         <Paper 
-            elevation={7} 
+            elevation={"7"} 
             sx={{
                 backgroundColor: "primary.main",
                 alignItems: "center",

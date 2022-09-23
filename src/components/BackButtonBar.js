@@ -8,7 +8,7 @@ import { ArrowBack } from "@mui/icons-material";
 import LinkButton from "./LinkButton";
 import { Grid } from "@mui/material";
 import ThemeToggle from "../components/ThemeToggle";
-
+import SignoutButton from "./SignoutButton";
 
 const StyledDiv = styled("div")(() => ({
     display: "flex",
@@ -22,7 +22,7 @@ export default function BackButtonBar({points, darkMode, onToggleTheme, setUser,
         Navigate("/auth/signin")
     }
     return (
-    <Grid container alignItems="flex-start" xs={12}>
+    <Grid container alignItems="flex-start">
         <Grid xs={4}>
             <Box
                 sx={{
@@ -85,7 +85,7 @@ export default function BackButtonBar({points, darkMode, onToggleTheme, setUser,
         <Grid xs={4}>
             <Stack direction="row" spacing={2} justifyContent="flex-end">
                 <ThemeToggle darkMode={darkMode} onToggleTheme={onToggleTheme} />
-                <SignoutButton to="/auth/signin" onclick={()=>{handleSignout()}}>Logout</SignoutButton>
+                <SignoutButton to="/auth/signin" onClick={()=>{handleSignout()}}>Logout</SignoutButton>
             </Stack>
         </Grid>
     </Grid>);

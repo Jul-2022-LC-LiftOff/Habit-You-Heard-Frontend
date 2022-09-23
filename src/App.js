@@ -31,7 +31,7 @@ function App() {
     fetchHabits();
   }, [user]);
 
-  console.log(user, habits)
+  console.log("user:",user, "habits:", habits);
 
   const fetchHabits = () => {
     fetch("http://localhost:8080/api/habits/", {
