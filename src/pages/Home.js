@@ -23,38 +23,60 @@ const StyledDiv = styled("div")(() => ({
 
 
 export default function Home({ habits, setHabits, onToggleTheme, user, setUser, darkMode}) {
-  console.log(user);
 
-
-  const [disaffirmHabit, setDisaffirmHabit] = useState({
+  const [habitAffirmation, setHabitAffirmation] = useState({
     completeHabit: null,
   });
-
-  // habit id undefinted
-  // const handleAffirmHabit = () => {
-  //   fetch(`http://localhost:8080/api/habit/${habits.id}/defirm`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization:
-  //         "$2a$10$0PnMZCHd.pFny4y2zTQE9e9BM8aBSuROyIt69uHzsPz16Lm8nhcYa",
-  //     },
-  //     body: JSON.stringify(disaffirmHabit),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       console.log("res", res);
-  //       setDisaffirmHabit({
-  //         ...disaffirmHabit,
-  //         completeHabit: false,
-  //       });
-  //     });
-  // };
 
   const current = new Date();
   const date = `${
     current.getMonth() + 1
   }/${current.getDate()}/${current.getFullYear()}`;
+
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+  const todaysHabits = habits.filter((habit) => habit.selectedDays.includes(days[current.getDay()]));
+
+  const handleAffirmHabit = (habitId) => {
+    console.log("Will this hit.");
+    fetch(`http://localhost:8080/api/habit/21/affirm`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: user.token,
+      },
+      body: JSON.stringify(habitAffirmation),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("res", res);
+        setHabitAffirmation({
+          ...habitAffirmation,
+          completeHabit: true,
+        });
+      });
+  };
+
+  const handleDefirmHabit = (habitId) => {
+    fetch(`http://localhost:8080/api/habit/21/defirm`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: user.token,
+      },
+      body: JSON.stringify(habitAffirmation),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("res", res);
+        setHabitAffirmation({
+          ...habitAffirmation,
+          completeHabit: false,
+        });
+      });
+  };
+
+
 
 
   function handleSignout(){
@@ -121,15 +143,10 @@ export default function Home({ habits, setHabits, onToggleTheme, user, setUser, 
             Daily Habits
           </LinkButton>
         </Grid>
-        <Grid xs={6} display="flex" justifyContent="center">
-          <LinkButton to="opportunitiesPage" sx={{ width: 155, height: 45 }}>
-            Opportunities
-          </LinkButton>
-        </Grid>
       </Grid>
 
       <Grid container spacing={2}>
-        {habits.map((habit) => (
+        {todaysHabits.map((habit) => (
           <Grid xs={6} display="flex" justifyContent="center">
             <Habit
               name={habit.name}

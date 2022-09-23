@@ -80,7 +80,6 @@ function App() {
                 <HabitsPage user={user} habits={habits} setHabits={setHabits} />
               }
             />
-            <Route path="OpportunitiesPage" element={<OpportunitiesPage />} />
           </Route>
           <Route path="/auth" element={<AuthBackground />}>
             <Route path="signin" element={<SignIn setUser={setUser} user={user} habits={habits} />} />
