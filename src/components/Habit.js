@@ -11,8 +11,9 @@ const StyledButton = styled(Button)({
   height: 100,
 });
 
-function Habit(props) {
-  
+function Habit({ checkmarkHandler, checkDefirmHandler, habit, name, description }) {
+
+  const [checked, setChecked] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

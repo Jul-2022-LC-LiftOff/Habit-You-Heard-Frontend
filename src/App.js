@@ -31,9 +31,7 @@ function App() {
     fetchHabits();
   }, [user]);
 
-  useEffect(() => {
-    console.log("user", user);
-  }, [user]);
+  console.log(user, habits)
 
   const fetchHabits = () => {
     fetch("http://localhost:8080/api/habits/", {
@@ -62,8 +60,11 @@ function App() {
                     <Home
                     onToggleTheme={handleToggleTheme}
                     user={user}
+                    setUser={setUser}
                     habits={habits}
+                    setHabits={setHabits}
                     darkMode={darkMode}
+                  
                   />                  ) : (
                     <Navigate replace to={"/auth/signin"} />
                   )
@@ -91,10 +92,9 @@ function App() {
                 <HabitsPage user={user} habits={habits} setHabits={setHabits} />
               }
             />
-            <Route path="OpportunitiesPage" element={<OpportunitiesPage />} />
           </Route>
           <Route path="/auth" element={<AuthBackground />}>
-            <Route path="signin" element={<SignIn setUser={setUser} />} />
+            <Route path="signin" element={<SignIn setUser={setUser} user={user} habits={habits} />} />
             <Route path="signup" title={SignUp.title} element={<SignUp />} />
           </Route>
         </Routes>
