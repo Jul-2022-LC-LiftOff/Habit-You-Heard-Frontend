@@ -42,7 +42,7 @@ function App() {
   useEffect(() => {
     fetchHabits();
     localStorage.setItem("user", JSON.stringify(user));
-  }, [user, fetchHabits]);
+  }, [user]);
 
   return (
     <ThemeProvider theme={theme}>
