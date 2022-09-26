@@ -8,18 +8,27 @@ import { ArrowBack } from "@mui/icons-material";
 import LinkButton from "./LinkButton";
 import { Grid } from "@mui/material";
 import ThemeToggle from "../components/ThemeToggle";
-import SignoutButton from "./SignoutButton";
 
 const StyledDiv = styled("div")(() => ({
     display: "flex",
     justifyContent: "center",
   }));
 
-export default function BackButtonBar({points, darkMode, onToggleTheme, setUser, setHabits}){
+export default function BackButtonBar({points, darkMode, onToggleTheme, setUser, setHabits, contentType}){
     function handleSignout(){
         setUser({token: ""})
         setHabits([])
         Navigate("/auth/signin")
+    }
+    let bubbleContent;
+    let bubbleLink;
+    if(contentType === "date"){
+        const current = new Date();
+        bubbleContent = () => `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`;
+        bubbleLink = "/calendar";
+    } else if (contentType === "points"){
+        bubbleContent = () => {return (<><u>Points</u><br/>{points}</>);}
+        bubbleLink = "/habitsPage";
     }
     return (
     <Grid container alignItems="flex-start">
@@ -76,7 +85,7 @@ export default function BackButtonBar({points, darkMode, onToggleTheme, setUser,
                         textAlign:"center"
                         }}
                     >
-                        <u>Points</u><br/>{points}{/*bubbleContent()*/}
+                        {bubbleContent()}
                     </Typography>
                     </Box>
                 </StyledDiv>
@@ -85,7 +94,7 @@ export default function BackButtonBar({points, darkMode, onToggleTheme, setUser,
         <Grid xs={4}>
             <Stack direction="row" spacing={2} justifyContent="flex-end">
                 <ThemeToggle darkMode={darkMode} onToggleTheme={onToggleTheme} />
-                <SignoutButton to="/auth/signin" onClick={()=>{handleSignout()}}>Logout</SignoutButton>
+                <LinkButton to="/auth/signin" onClick={()=>{handleSignout()}}>Logout</LinkButton>
             </Stack>
         </Grid>
     </Grid>);

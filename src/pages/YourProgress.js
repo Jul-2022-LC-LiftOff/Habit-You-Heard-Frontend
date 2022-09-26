@@ -55,7 +55,8 @@ const YourProgress = ({habits, user, darkMode, onToggleTheme, setHabits, setUser
           darkMode={darkMode} 
           onToggleTheme={onToggleTheme}
           setUser={setUser}
-          setHabits={setHabits}/>
+          setHabits={setHabits}
+          contentType="points"/>
         <Grid container spacing={10} marginTop="70px" justifyContent="center">
             {habits.map((habit) => (
                 <HabitBadgeProgress 
