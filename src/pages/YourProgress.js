@@ -5,6 +5,7 @@ import Users from "../testData/testUsers.json";
 import Habits from "../testData/testHabits.json";
 import { Paper } from '@mui/material';
 import HabitBadgeProgress from '../components/HabitBadgeProgress';
+import BackButtonBar from "../components/BackButtonBar";
 
 const divisions = ["Iron", "Bronze", "Silver", "Gold", "Platinum", "Emerald", "Diamond"];
 const divisionColors = ["#a19d94", "#cd7f32", "#c0c0c0", "#ffd700", "#e5e4e2", "#50c878", "#b9f2ff" ];
@@ -39,16 +40,23 @@ const getStreakMessage = (streak) => {
 }
 
 //TODO: remove placeholder user in taskbar.
-const YourProgress = ({habits, user}) => {
-  console.log(user);
+const YourProgress = ({habits, user, darkMode, onToggleTheme, setHabits, setUser}) => {
+  console.log(user, habits);
       return (
-      <Paper sx={{backgroundImage: `url(background3.png)`,
+      <Paper sx={{backgroundImage: `url(backgroun.png)`,
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
                   minxWidth: "100vw",
                   minHeight: "100vh"}}>
-        <Taskbar contentType="points" name={user.username} points={user.points}></Taskbar>
+        {/*<Taskbar contentType="points" name={user.username} points={user.points}></Taskbar>*/}
+        <BackButtonBar 
+          points={user.points}
+          darkMode={darkMode} 
+          onToggleTheme={onToggleTheme}
+          setUser={setUser}
+          setHabits={setHabits}
+          contentType="points"/>
         <Grid container spacing={10} marginTop="70px" justifyContent="center">
             {habits.map((habit) => (
                 <HabitBadgeProgress 

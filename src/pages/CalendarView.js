@@ -1,10 +1,18 @@
 import React from 'react';
 import HabitCalendar from '../components/HabitCalendar.js'
+import BackButtonBar from '../components/BackButtonBar.js';
 import Taskbar from '../components/Taskbar.js';
-const CalendarView = ({user, habits}) => {
+
+const CalendarView = ({user, habits, darkMode, onToggleTheme, setUser, setHabits}) => {
     return (
       <>
-        <Taskbar contentType="date" name={user.username}/>
+        <BackButtonBar 
+          points={user.points}
+          darkMode={darkMode} 
+          onToggleTheme={onToggleTheme}
+          setUser={setUser}
+          setHabits={setHabits}
+          contentType="date"/>        
         <HabitCalendar habits={habits}/>
       </>
     );

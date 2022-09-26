@@ -17,7 +17,7 @@ const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, }) => 
     return (
     <Grid xs={10} md={3.5}>
         <Paper 
-            elevation={7} 
+            elevation={"7"} 
             sx={{
                 backgroundColor: "primary.main",
                 alignItems: "center",
@@ -27,7 +27,7 @@ const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, }) => 
             <Box sx={{borderBottom: 1, borderColor: "#fafafa"}}>
                 <Typography sx={{
                     fontSize: '1.3rem',
-                    color: "#fafafa", 
+                    color: "primary.contrastText", 
                     textAlign: "center",
                     alignItems: "center",
                 }}>
@@ -72,7 +72,8 @@ const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, }) => 
             onClose={handlePopoverClose}
             disableRestoreFocus
             PaperProps={{sx:{
-                border:"1px solid black",
+                border:"1px solid",
+                borderColor:"#fafafa",
                 width: "200px",
                 backgroundColor: "primary.main"
             }}}>   
@@ -91,8 +92,8 @@ const HabitBadgeProgress = ({title, description, badgeMeta, streakLength, }) => 
                                 fontSize: "1.2rem"
                             }}>{badgeMeta.rank}</Paper>
                         </Box> 
-                        <Box borderBottom="1px solid white" padding="10px" >{description}</Box>
-                        <Box                                padding="10px">{streakLength}</Box>
+                        <Box borderBottom="1px solid" borderColor="#fafafa" padding="10px" color="primary.contrastText" >{description}</Box>
+                        <Box                                padding="10px" color="primary.contrastText">{streakLength}</Box>
                 </Typography>
         </Popover>
     </Grid>
