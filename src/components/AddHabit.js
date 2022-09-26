@@ -31,7 +31,7 @@ export default function AddHabit({ habit, name, buttonHandler }) {
   return (
     <ButtonGroup variant="contained">
       <StyledButton size="small">
-        <IconButton size="large" onClick={handleClick}>
+        <IconButton component="div" size="large" onClick={handleClick}>
           <DeleteIcon fontSize="large" />
         </IconButton>
         <Popover

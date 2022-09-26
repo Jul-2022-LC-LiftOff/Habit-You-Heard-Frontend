@@ -10,7 +10,7 @@ const StyledLink = styled(Link)({
 function LinkButton(props) {
     return (
         <StyledLink to={props.to}>
-            <Button variant='contained' {...props}>{props.children}</Button>
+            <Button component="div" variant='contained' {...props}>{props.children}</Button>
         </StyledLink>
     )
 }
