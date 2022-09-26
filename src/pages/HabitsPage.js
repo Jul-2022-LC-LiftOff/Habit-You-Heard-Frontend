@@ -56,7 +56,7 @@ export default function HabitsPage({ habits, setHabits, user }) {
       .then((res) => res.text())
       .then(() => {
         const newHabitArray = habits.filter((habit) => habit.id != habitId);
-        setHabits([...newHabitArray]);
+        setHabits([...newHabitArray].sort((a, b) => a.id - b.id));
       });
   };
 
@@ -71,7 +71,7 @@ export default function HabitsPage({ habits, setHabits, user }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        setHabits([...habits, data]);
+        setHabits([...habits, data].sort((a, b) => a.id - b.id));
       });
   };
 
@@ -155,7 +155,7 @@ export default function HabitsPage({ habits, setHabits, user }) {
 
       <Grid container spacing={2} marginTop="20px">
         {habits.map((habit) => (
-          <Grid xs={6} display="flex" justifyContent="center">
+          <Grid key={habit.id} xs={6} display="flex" justifyContent="center">
             <AddHabit
               name={habit.name}
               habit={habit}

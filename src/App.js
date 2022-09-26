@@ -8,14 +8,12 @@ import CalendarView from "./pages/CalendarView";
 import HabitsPage from "./pages/HabitsPage";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
-import OpportunitiesPage from "./pages/OpportunitiesPage";
 import SignIn from "./pages/SignIn";
 import YourProgress from "./pages/YourProgress";
 
 function App() {
-  const [user, setUser] = useState({token: ""});
+  const [user, setUser] = useState(localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {token: ""});
   const [habits, setHabits] = useState([]);
-  // console.log("This is the tested user: ", testUser);
 
   const [darkMode, setDarkMode] = useState(false);
   const handleToggleTheme = () => {
@@ -27,12 +25,6 @@ function App() {
     },
   });
 
-  useEffect(() => {
-    fetchHabits();
-  }, [user]);
-
-  console.log("user:",user, "habits:", habits);
-
   const fetchHabits = () => {
     fetch("http://localhost:8080/api/habits/", {
       headers: {
@@ -43,9 +35,14 @@ function App() {
         return response.json();
       })
       .then((data) => {
-        setHabits(data);
+        setHabits(data.sort((a, b) => a.id - b.id));
       });
   };
+
+  useEffect(() => {
+    fetchHabits();
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   return (
     <ThemeProvider theme={theme}>
