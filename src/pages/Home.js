@@ -1,20 +1,15 @@
+import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
-import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-// import testHabits from "../testData/testHabits.json";
 import Habit from "../components/Habit";
 import LinkButton from "../components/LinkButton";
-import SignoutButton from "../components/SignoutButton";
 import ThemeToggle from "../components/ThemeToggle";
-
-
-// import testUser from "../testData/testUser.json";
 
 const StyledDiv = styled("div")(() => ({
   display: "flex",
@@ -33,25 +28,6 @@ export default function Home({ habits, setHabits, onToggleTheme, user, setUser, 
 
   const todaysHabits = habits.filter((habit) => habit.selectedDays.includes(days[current.getDay()]));
 
-  // const handleDefirmHabit = (habitId) => {
-  //   fetch(`http://localhost:8080/api/habit/21/defirm`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: user.token,
-  //     },
-  //     body: JSON.stringify(habitAffirmation),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       console.log("res", res);
-  //       setHabitAffirmation({
-  //         ...habitAffirmation,
-  //         completeHabit: false,
-  //       });
-  //     });
-  // };
-
   function handleSignout(){
     setUser({token: ""})
     setHabits([])
@@ -59,8 +35,6 @@ export default function Home({ habits, setHabits, onToggleTheme, user, setUser, 
     
   }
   const navigate = useNavigate();
-
-
 
   return (
     <>
@@ -78,7 +52,7 @@ export default function Home({ habits, setHabits, onToggleTheme, user, setUser, 
           <Stack direction="row" spacing={2}>
             <ThemeToggle darkMode={darkMode} onToggleTheme={onToggleTheme} />
             <LinkButton to="yourprogress">Badges</LinkButton>
-            <SignoutButton to="/auth/signin" onClick={() => handleSignout()}>Logout</SignoutButton>
+            <LinkButton to="/auth/signin" onClick={() => handleSignout()}>Logout</LinkButton>
           </Stack>
         </Stack>
 
@@ -120,7 +94,7 @@ export default function Home({ habits, setHabits, onToggleTheme, user, setUser, 
 
       <Grid container spacing={2}>
         {todaysHabits.map((habit) => (
-          <Grid xs={6} display="flex" justifyContent="center">
+          <Grid key={habit.id} xs={6} display="flex" justifyContent="center">
             <Habit
               habit={habit}
               setHabits={setHabits}
