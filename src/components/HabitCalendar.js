@@ -13,16 +13,33 @@ let daysCheckArray = [
 ];
 
 function DataConversion(habits) {
-  let habitsArray = [];
-  for (let i = 0; i < habits.length; i++) {
-    habitsArray[i] = {};
-    habitsArray[i].startRecur = habits[i].startDate;
-    habitsArray[i].title = habits[i].name;
-    habitsArray[i].daysOfWeek = habits[i].selectedDays.map((day) => {
-      return daysCheckArray.indexOf(day);
-    });
-  }
-  return habitsArray;
+  let eventsArray = [];
+  habits.map((habit) => {
+
+    let nextDay;
+
+    habit.habitMetaList.map((habitMeta) => {
+
+      const habitMetaDate = new Date(habitMeta.dateOfCompletion);
+      nextDay = `${habitMetaDate.getFullYear()}-${(habitMetaDate.getMonth() + 1).toString().padStart(2, "0")}-${habitMetaDate.getDate() + 1}`;
+
+      eventsArray.push({
+        title: habit.name,
+        start: habitMeta.dateOfCompletion,
+        allDay: true,
+        backgroundColor: habitMeta.completedHabit ? "#1BD835" : "#d81b60"
+      })
+    })
+
+    eventsArray.push({
+      startRecur: nextDay ? nextDay : habit.startDate,
+      title: habit.name,
+      daysOfWeek: habit.selectedDays.map((day) => {
+        return daysCheckArray.indexOf(day);
+      })
+    })
+  })
+  return eventsArray;
 }
 
 function renderEventContent(eventInfo) {
@@ -35,13 +52,13 @@ function renderEventContent(eventInfo) {
 }
 
 function HabitCalendar({ habits }) {
-  let habitsArray = habits && DataConversion(habits);
+  let eventsArray = habits && DataConversion(habits);
   return (
     <FullCalendar
       selectable={true}
       plugins={[dayGridPlugin]}
       eventContent={renderEventContent}
-      events={habitsArray}
+      events={eventsArray}
     />
   );
 }
